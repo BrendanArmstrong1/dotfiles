@@ -1,0 +1,10 @@
+xset r rate 240 50 &
+nvidia-settings --load-config-only &
+fehbg &
+dwmblocks &
+dunst & 
+transmission-daemon &
+picom -b &
+setxkbmap -option caps:swapescape &
+xrdb -merge ~/.config/X11/xresources
+exec dwm

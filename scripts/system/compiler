@@ -1,0 +1,44 @@
+#!/bin/sh
+
+fullpath="$1"
+extension="${fullpath##*.}"
+fileroot="${fullpath%.*}"
+dir="${fullpath%/*}/"
+
+
+C_processor() {
+    root="$(pwd)"
+    if [ -e $root/Makefile ]
+    then
+        make &&
+        "${root}/Output"
+    else
+        gcc -Wall -lm -o "${fileroot}" "$fullpath" && 
+        "${fileroot}"
+    fi
+}
+
+Latex_processor() {
+    pdflatex -output-directory "$dir" "$fullpath" 
+    pidof zathura || zathura "$fileroot.pdf" &
+}
+
+html_processor() {
+    pidof surf || surf "$fullpath" &
+    pidof surf && autorefresh
+}
+
+javascript_processor() {
+   node "$fullpath" 
+}
+
+
+case "$extension" in
+    "js") javascript_processor ;;
+    "py") python "$fullpath";;
+    "html"|"css") html_processor ;;
+    "c")  C_processor ;;
+    "tex") Latex_processor ;;
+    *) echo "Sorry .$extension is not in my handle list" ;;
+esac
+

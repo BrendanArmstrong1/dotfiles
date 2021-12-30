@@ -1,0 +1,21 @@
+#!/bin/sh
+
+
+file="$(find ~/ -regextype posix-extended \
+        -type d -a -regex '.*/(H|.local|.cache|.config/.*/.*/.*|node_modules|.git|__pycache__|.mozilla|VirtualBox.*)' -prune -o \
+        -type f ! -size 0 ! -regex '.*\.(mp3|png|jpeg|jpg|log|aux|tdb|out|gz|zip)' \( -path '*scripts*/*' -o ! -executable \) \
+        | fzf)"
+
+ext="${file##*.}"
+dir="${file%/*}"
+
+[ "$file" = "" ] && exit 1
+
+case "$ext" in
+    pdf)
+        zathura "$file"
+        ;;
+    *)
+        vim -c "cd! $dir" "$file"
+        ;;
+esac

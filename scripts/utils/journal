@@ -1,0 +1,20 @@
+#!/bin/sh
+
+ddate=$(date +%B_%d)
+dir="$HOME/S/Documents/Journals/$ddate"
+file="$(date +%B_%d_%a_%Y).tex"
+
+[ -d $dir ] || mkdir $dir 
+
+[ -f "$dir/$file" ] && vim -c "startinsert | 
+    call feedkeys(\"\<Esc>\") |
+    call feedkeys(\"Gk\") |
+    call feedkeys(\"o\\\section*{$(date +%r)\<Esc>o\<CR>\<CR>\<Esc>kki\")" "$dir/$file"
+
+[ -f "$dir/$file" ] || vim -c "startinsert | 
+    call feedkeys(\",st\") |
+    call feedkeys(\",tt\") |
+    call feedkeys(\"Daily Journal\") |
+    call feedkeys(\",ta\") |
+    call feedkeys(\"Brendan Armstrong\<Esc>\") |
+    call feedkeys(\":exec 8\<CR>o\\\section*{$(date +%r)\<Esc>oDear Daily Journal \")" "$dir/$file"

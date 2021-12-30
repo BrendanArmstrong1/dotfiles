@@ -1,0 +1,63 @@
+! Transparency (0-1)
+*.alpha: 0.8
+*.alphaOffset: 0.0
+
+!! Set a default font and font size as below:
+*.font: FiraCode Nerd Font Mono:size=14
+
+st.termname: st-256color
+st.borderpx: 2
+
+!! Set the background, foreground and cursor colors as below:
+*.background: #000000
+*.foreground: white
+*.cursorcolor: white
+
+! Black + DarkGrey
+*color0:  #000000
+*color8:  #555753
+! DarkRed + Red
+*color1:  #cd0000
+*color9:  #ff0000
+! DarkGreen + Green
+*color2:  #00cd00
+*color10: #00ff00
+! DarkYellow + Yellow
+*color3:  #cdcd00
+*color11: #ffff00
+! DarkBlue + Blue
+*color4:  #0000cd
+*color12: #2292ff
+! DarkMagenta + Magenta
+*color5:  #cd00cd
+*color13: #ff00ff
+!DarkCyan + Cyan (both not tango)
+*color6:  #00cdcd
+*color14: #00ffff
+! LightGrey + White
+*color7:  #bbbbbb
+*color15: #ffffff
+
+/* !! gruvbox: */
+/* *.color0: #1d2021 */
+/* *.color8: #928374 */
+/* *.color1: #cc241d */
+/* *.color9: #fb4934 */
+/* *.color2: #98971a */
+/* *.color10: #b8bb26 */
+/* *.color3: #d79921 */
+/* *.color11: #fabd2f */
+/* *.color4: #458588 */
+/* *.color12: #83a598 */
+/* *.color5: #b16286 */
+/* *.color13: #d3869b */
+/* *.color6: #689d6a */
+/* *.color14: #8ec07c */
+/* *.color7: #a89984 */
+/* *.color15: #ebdbb2 */
+/* *.background: #000000 */
+/* *.foreground: white */
+/* *.cursorcolor: white */
+
+
+

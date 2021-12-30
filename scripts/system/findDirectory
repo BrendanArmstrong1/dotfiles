@@ -1,0 +1,11 @@
+#!/bin/sh
+
+
+dir="$(find ~/ -regextype posix-extended \
+        -type d -a -regex '.*/(H|.local|.cache|node_modules|.git|__pycache__|.mozilla|VirtualBox.*)' -prune -o \
+        -type f ! -regex '.*\.(mp3|png|jpeg|jpg|log|aux|tdb|out|gz|zip)' \( -path '*scripts*/*' -o ! -executable \) \
+        -printf '%h\n' | fzf)"
+
+[ "$dir" = "" ] && exit 1
+
+cd "$dir"

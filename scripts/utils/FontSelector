@@ -1,0 +1,4 @@
+#!/bin/sh
+
+fc-list | awk -F: '{print $1}' | sed 's/\s/\\ /g' | dmenu -l 20 -p 'FontSelector' | xargs display
+

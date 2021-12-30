@@ -1,0 +1,11 @@
+#!/bin/sh
+
+bg="$(find ~/H/MediaStorage/backgrounds -type f | sxiv -ito | xargs echo)"
+mon0="${bg%% *}"
+second="${bg#* }"
+mon1="${second%% *}"
+
+echo "$mon0" > ~/.config/wall.txt
+echo "$mon1" >> ~/.config/wall.txt
+
+feh --no-fehbg --bg-scale "$mon0" --bg-scale "$mon1"
