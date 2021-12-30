@@ -1,0 +1,16 @@
+# Aliases for terminal
+
+alias ls='ls --color=auto'
+alias la='ls -a --color=auto'
+alias ll='ls -alh --color=auto'
+
+alias df='df -h'
+alias grep='grep --color'
+
+alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"'
+
+alias cim='vim'
+alias bim='vim'
+alias scim='sc-im'
+
+alias xrdb='xrdb -load ~/.config/X11/xresources'
