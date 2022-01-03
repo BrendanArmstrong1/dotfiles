@@ -19,18 +19,63 @@ C_processor() {
 }
 
 Latex_processor() {
-    pdflatex -output-directory "$dir" "$fullpath" 
+    [ -d $dir/FileStorage ] || mkdir "$dir/FileStorage"
+    pdflatex -output-directory "$dir/FileStorage" "$fullpath" 
+    mv "$dir/FileStorage/${fileroot##*/}.pdf" "$dir"
     pidof zathura || zathura "$fileroot.pdf" &
 }
 
 html_processor() {
-    pidof surf || surf "$fullpath" &
-    pidof surf && autorefresh
+    window="$(xdotool search --onlyvisible --name " - qutebrowser")"
+    [ -z $window ] && qutebrowser "$fullpath" || autorefresh "$window"
+}
+
+JS_HTML() {
+    title="$(sed -n 's/.*<title>\(.\+\)<\/title>.*/\1/p' $dir/index.html)"
+    window="$(xdotool search --onlyvisible --name "$title - qutebrowser")"
+    if [ -z $window ]
+    then
+        setsid qutebrowser "${dir}/index.html" &
+    else
+        autorefresh "$window"
+    fi
 }
 
 javascript_processor() {
-   node "$fullpath" 
+    [ -f "${dir}/index.html" ] && JS_HTML || node "$fullpath"
 }
+
+autorefresh() {
+    initial_state="$(xdotool getactivewindow)"
+    monitor="$(dwm-msg get_dwm_client $initial_state | sed -n 's/.*monitor_number.*\([[:digit:]]\+\),/\1/p')"
+    target_mon="$(dwm-msg get_dwm_client $1 | sed -n 's/.*monitor_number.*\([[:digit:]]\+\),/\1/p')"
+    if [ "$monitor" -eq "$target_mon" ]
+    then
+        while [ "$(xdotool getactivewindow)" -ne $1 ]
+        do
+            dwmc focusstack -1
+            [ "$(xdotool getactivewindow)" = $1 ] && xdotool key "r"
+        done
+        while [ "$(xdotool getactivewindow)" -ne $initial_state ]
+        do
+            dwmc focusstack -1
+        done
+    else
+        dwmc focusmon -1
+        [ "$(xdotool getactivewindow)" = $1 ] && xdotool key "r"
+        while [ "$(xdotool getactivewindow)" -ne $1 ]
+        do
+            dwmc focusstack -1
+            [ "$(xdotool getactivewindow)" = $1 ] && xdotool key "r"
+        done
+        dwmc focusmon -1
+        while [ "$(xdotool getactivewindow)" -ne $initial_state ]
+        do
+            dwmc focusstack -1
+        done
+    fi
+}
+
 
 
 case "$extension" in

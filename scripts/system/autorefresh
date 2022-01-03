@@ -1,6 +1,0 @@
-#!/bin/sh
-# Simple script to refresh surf page
-
-dwmc focusstack -1
-xdotool key 'ctrl+r'
-dwmc focusstack +1

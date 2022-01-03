@@ -32,4 +32,4 @@ sed -e "s/Coverletter/${coverfile}.pdf/g" -e "s/Resume/${resfile}.pdf/g" \
     ~/.config/scripts/utils/combined_resume-coverletter.tex \
     >> "$directory/${comfile}.tex"
 
-vim -O "$directory/${coverfile}.tex" +"3,77fo" "$directory/${resfile}.tex" +"2,86fo"
+vim -O "$directory/${coverfile}.tex" +"3,67fo" "$directory/${resfile}.tex"
