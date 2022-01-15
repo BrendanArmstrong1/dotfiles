@@ -5,7 +5,7 @@ location="${2:-location2}"
 position="${3:-position2}"
 date="$(date "+%b-%d-%Y")"
 name2="$(echo "$name" | sed 's/ /-/g')"
-position2="$(echo "$position" | sed 's/ /-/g')"
+position2="$(echo "$position" | sed -e 's/ /-/g' -e 's/\//\\\//g')"
 location2="$(echo "$location" | sed 's/ /-/g')"
 #~/S/Documents/Employment/Cover_letters/${name2}_v$index
 resfile="Brendan-Armstrong_Resume_${position2}_${date}"
@@ -32,4 +32,4 @@ sed -e "s/Coverletter/${coverfile}.pdf/g" -e "s/Resume/${resfile}.pdf/g" \
     ~/.config/scripts/utils/combined_resume-coverletter.tex \
     >> "$directory/${comfile}.tex"
 
-vim -O "$directory/${coverfile}.tex" +"3,67fo" "$directory/${resfile}.tex"
+vim -O "$directory/${coverfile}.tex" "$directory/${resfile}.tex" +"3,67fo"

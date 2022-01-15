@@ -103,14 +103,14 @@ ResourcePref resources[] = {
 #include "movestack.c"
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ Mod1Mask|ControlMask,         XK_s,      spawn,          SHCMD("surf") },
 	{ Mod1Mask|ControlMask,         XK_1,      spawn,          SHCMD("changebg") },
 	{ Mod1Mask|ControlMask,         XK_2,      spawn,          SHCMD("bgswap.sh") },
-	{ Mod1Mask|ControlMask,         XK_e,      spawn,          SHCMD("dmenuEmoji.sh") },
+	{ Mod1Mask|ControlMask,         XK_3,      spawn,          SHCMD("dmenuEmoji.sh") },
 	{ Mod1Mask|ControlMask,         XK_b,      spawn,          SHCMD("brave") },
 	{ Mod1Mask|ControlMask,         XK_q,      spawn,          SHCMD("qutebrowser") },
 	{ Mod1Mask|ControlMask,         XK_d,      spawn,          SHCMD("discord") },
 	{ Mod1Mask|ControlMask,         XK_p,      spawn,          SHCMD("pavucontrol") },
+	{ Mod1Mask|ControlMask,         XK_e,      spawn,          SHCMD("emacs") },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },

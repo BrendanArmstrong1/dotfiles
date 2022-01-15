@@ -14,3 +14,5 @@ alias bim='vim'
 alias scim='sc-im'
 
 alias xrdb='xrdb -load ~/.config/X11/xresources'
+
+alias em='emacs -nw'
