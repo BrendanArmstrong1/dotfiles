@@ -5,11 +5,9 @@ char *externalpipe_sigusr1[] = {"/bin/sh", "-c", "externalpipe_buffer.sh st_stri
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "FiraCode Nerd Font Mono:pixelsize=14:antialias=true:autohint=true";
+static char *font = "FuraCode Nerd Font Mono:pixelsize=14:antialias=true:autohint=true";
 static char *font2[] = { 
-	"FiraCode Nerd Font Mono:pixelsize=14:antialias=true:autohint=true",
-	"Hack Nerd Font Mono:pixelsize=11:antialias=true:autohint=true",
-	"Inconsolata Nerd Font Mono:pixelsize=11:antialias=true:autohint=true",
+	"FuraCode Nerd Font Mono:pixelsize=14:antialias=true:autohint=true",
 	"Source Han Sans:pixelsize=11:antialias=true:autohint=true",
 	"Noto Color Emoji:pixelsize=15:antialias=true:autohint=true"
 };

@@ -6,14 +6,12 @@ static unsigned int snap      = 32;       /* snap pixel */
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
 static const int focusonwheel       = 0;
-static char font[]            = "FiraCode Nerd Font Mono:size=10";
-static char dmenufont[]       = "FiraCode Nerd Font Mono:size=10";
+static char font[]            = "FuraCode Nerd Font Mono:size=10";
+static char dmenufont[]       = "FuraCode Nerd Font Mono:size=10";
 static const char *fonts[]          = { "monospace:size=10",
 										"Noto Color Emoji:size:16",
-										"FiraCode Nerd Font Mono:size=10",
-										"Hack Nerd Font Mono:size=10",
+										"FuraCode Nerd Font Mono:size=10",
 										"Source Han Sans:size=10",
-										"Inconsolata Nerd Font Mono:size=10"
 										};
 static char normbgcolor[]           = "#222222";
 static char normbordercolor[]       = "#444444";
@@ -110,7 +108,7 @@ static Key keys[] = {
 	{ Mod1Mask|ControlMask,         XK_q,      spawn,          SHCMD("qutebrowser") },
 	{ Mod1Mask|ControlMask,         XK_d,      spawn,          SHCMD("discord") },
 	{ Mod1Mask|ControlMask,         XK_p,      spawn,          SHCMD("pavucontrol") },
-	{ Mod1Mask|ControlMask,         XK_e,      spawn,          SHCMD("emacs") },
+	{ Mod1Mask|ControlMask,         XK_e,      spawn,          SHCMD("emacsclient -c") },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
