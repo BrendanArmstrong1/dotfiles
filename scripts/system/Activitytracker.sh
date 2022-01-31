@@ -1,6 +1,6 @@
 #!/bin/sh
 
-pids="$(xdotool search --onlyvisible -name '(- Discord|- mpv|Terminal|- VIM|- Brave|@|pdf)')"
+pids="$(xdotool search --onlyvisible -name '(- Discord|Emacs|- mpv|Terminal|- VIM|- Brave|@|pdf)')"
 focuspid="$(xdotool getwindowfocus)"
 focusname="$(xdotool getwindowname $focuspid | sed ':a;N;$!ba;s/\n/ /g')"
 

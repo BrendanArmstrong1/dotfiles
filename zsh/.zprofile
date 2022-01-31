@@ -4,7 +4,7 @@
 
 [[ -f ~/.config/zsh/.zshrc ]] && . ~/.config/zsh/.zshrc
 
-export PATH=$PATH:$HOME/.config/scripts:$HOME/.config/scripts/blocks:$HOME/.config/scripts/utils:$HOME/.config/scripts/programs:$HOME/.config/scripts/system
+export PATH=$PATH:$HOME/.config/scripts:$HOME/.config/scripts/blocks:$HOME/.config/scripts/utils:$HOME/.config/scripts/programs:$HOME/.config/scripts/system:$HOME/.config/emacs/bin
 export EDITOR=vim
 export TERMINAL=st
 export BROWSER=qutebrowser
