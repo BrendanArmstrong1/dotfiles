@@ -44,7 +44,7 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor    float x,y,w,h         floatborderpx*/
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1,        50,50,500,500,        5 },
+//	{ "Gimp",     NULL,       NULL,       0,            1,           -1,        50,50,1000,1000,        5 },
 	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1,        50,50,500,500,        5 },
 };
 
@@ -104,11 +104,11 @@ static Key keys[] = {
 	{ Mod1Mask|MODKEY,         XK_1,      spawn,          SHCMD("changebg") },
 	{ Mod1Mask|MODKEY,         XK_2,      spawn,          SHCMD("bgswap.sh") },
 	{ Mod1Mask|MODKEY,         XK_3,      spawn,          SHCMD("dmenuEmoji.sh") },
-	{ Mod1Mask|MODKEY,         XK_b,      spawn,          SHCMD("brave") },
+	{ Mod1Mask|MODKEY,         XK_b,      spawn,          SHCMD("google-chrome-stable") },
 	{ Mod1Mask|MODKEY,         XK_w,      spawn,          SHCMD("qutebrowser") },
 	{ Mod1Mask|MODKEY,         XK_d,      spawn,          SHCMD("discord") },
 	{ Mod1Mask|MODKEY,         XK_p,      spawn,          SHCMD("pavucontrol") },
-	{ Mod1Mask|MODKEY,         XK_e,      spawn,          SHCMD("emacsclient -c") },
+	{ Mod1Mask|MODKEY,         XK_e,      spawn,          SHCMD("setsid st -e vim") },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },

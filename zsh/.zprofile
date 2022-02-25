@@ -4,10 +4,10 @@
 
 [[ -f ~/.config/zsh/.zshrc ]] && . ~/.config/zsh/.zshrc
 
-export PATH=$PATH:$HOME/.config/scripts:$HOME/.config/scripts/blocks:$HOME/.config/scripts/utils:$HOME/.config/scripts/programs:$HOME/.config/scripts/system:$HOME/.config/emacs/bin
+export PATH=$PATH:$HOME/.config/scripts:$HOME/.config/scripts/blocks:$HOME/.config/scripts/utils:$HOME/.config/scripts/programs:$HOME/.config/scripts/system:$HOME/.config/emacs/bin:$HOME/.local/bin:$HOME/.local/share/gem/ruby/3.0.0/bin
 export EDITOR=vim
 export TERMINAL=st
-export BROWSER=qutebrowser
+export BROWSER=google-chrome-stable
 
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export LESSKEY="$XDG_CONFIG_HOME/less/lesskey"

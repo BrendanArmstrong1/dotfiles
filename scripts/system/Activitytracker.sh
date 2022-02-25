@@ -1,6 +1,6 @@
 #!/bin/sh
 
-pids="$(xdotool search --onlyvisible -name '(- Discord|Emacs|- mpv|Terminal|- VIM|- Brave|@|pdf)')"
+pids="$(xdotool search --onlyvisible -name '(- Discord|- Google Chrome|Emacs|- mpv|Terminal|- VIM|- Brave|@|pdf)')"
 focuspid="$(xdotool getwindowfocus)"
 focusname="$(xdotool getwindowname $focuspid | sed ':a;N;$!ba;s/\n/ /g')"
 
@@ -10,5 +10,5 @@ echo "$(date '+%c')"
 for pid in $pids;do
     [ "$pid" = "$focuspid" ] || xdotool getwindowname $pid
 done
-echo "$focusname (Current window focus)" 
+echo "$focusname (Current window focus)"
 echo ""
