@@ -18,6 +18,17 @@ C_processor() {
     fi
 }
 
+Rust_processor() {
+    root="$(pwd)" 
+    if [ -e "$root"/Cargo.toml ]
+    then
+        cargo run
+    else
+        rustc "$fullpath" && 
+        "${fileroot}"
+    fi
+}
+
 Latex_processor() {
     [ -d "$dir"/FileStorage ] || mkdir "$dir/FileStorage"
     pdflatex -output-directory "$dir/FileStorage" "$fullpath" 

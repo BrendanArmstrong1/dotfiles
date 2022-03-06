@@ -160,7 +160,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_r,      quit,           {1} },
-	{ MODKEY|ControlMask|ShiftMask, XK_v,      quit,           {0} }, 
+	{ MODKEY|ControlMask|ShiftMask, XK_v,      quit,           {0} },
 };
 
 /* button definitions */
@@ -173,9 +173,9 @@ static Button buttons[] = {
 	{ ClkStatusText,        0,              Button1,        sigdwmblocks,   {.i = 1} },
 	{ ClkStatusText,        0,              Button2,        sigdwmblocks,   {.i = 2} },
 	{ ClkStatusText,        0,              Button3,        sigdwmblocks,   {.i = 3} },
-	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
-	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
-	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
+	{ ClkClientWin,         ShiftMask,      Button1,        movemouse,      {0} },
+	{ ClkClientWin,         ShiftMask,      Button2,        togglefloating, {0} },
+	{ ClkClientWin,         ShiftMask,      Button3,        resizemouse,    {0} },
 	{ ClkTagBar,            0,              Button1,        view,           {0} },
 	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
