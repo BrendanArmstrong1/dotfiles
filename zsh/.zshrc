@@ -4,18 +4,18 @@
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
-autoload -Uz vcs_info
-precmd() { vcs_info }
-zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' stagedstr '↑'
-zstyle ':vcs_info:*' unstagedstr '¿'
-zstyle ':vcs_info:git*' formats '%F{011}∫▷ %b%u%c%f'
-#PS1='[\u@\h \W]\$ '
-#PS1='\e[0;31m[\e[m\e[0;36m\u\e[0;31m@\e[m\e[0;36m\h\e[m \e[1;34m\W\e[m\e[0;31m]\e[m\e[0;36m\$\e[m '
-setopt PROMPT_SUBST
-autoload -U colors && colors
-#PS1="%B%{$fg[red]%}[%{$fg[cyan]%}%n%{$fg[red]%}@%{$fg[cyan]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
-PROMPT='%F{009}[%f%F{051}%n%f%F{009}@%f%F{051}%M%f %F{013}${PWD/#$HOME/~}%f ${vcs_info_msg_0_}%F{009}]%f$ '
+#autoload -Uz vcs_info
+#precmd() { vcs_info }
+#zstyle ':vcs_info:*' check-for-changes true
+#zstyle ':vcs_info:*' stagedstr '↑'
+#zstyle ':vcs_info:*' unstagedstr '¿'
+#zstyle ':vcs_info:git*' formats '%F{011}∫▷ %b%u%c%f'
+##PS1='[\u@\h \W]\$ '
+##PS1='\e[0;31m[\e[m\e[0;36m\u\e[0;31m@\e[m\e[0;36m\h\e[m \e[1;34m\W\e[m\e[0;31m]\e[m\e[0;36m\$\e[m '
+#setopt PROMPT_SUBST
+#autoload -U colors && colors
+##PS1="%B%{$fg[red]%}[%{$fg[cyan]%}%n%{$fg[red]%}@%{$fg[cyan]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
+#PROMPT='%F{009}[%f%F{051}%n%f%F{009}@%f%F{051}%M%f %F{013}${PWD/#$HOME/~}%f ${vcs_info_msg_0_}%F{009}]%f$ '
 
 
 # History in cache directory:
@@ -74,3 +74,4 @@ preexec() { echo -ne '\e[2 q' ;} # Use beam shape cursor for each new prompt
 # Load zsh-syntax-highlighting; should be last.
 source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh 2>/dev/null
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+eval "$(starship init zsh)"
