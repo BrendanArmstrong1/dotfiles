@@ -13,9 +13,14 @@ alias cim='vim'
 alias bim='vim'
 alias scim='sc-im'
 
+alias lf="lfub"
+
 alias xrdb='xrdb -load ~/.config/X11/xresources'
 
 alias im='nsxiv'
 
 alias twit='rainbowstream'
 alias cam='mpv --demuxer-lavf-format=video4linux2 --demuxer-lavf-o-set=input_format=mjpeg av://v4l2:/dev/video0'
+
+alias cp='cp -iv'
+alias fl='source findDirectory'
