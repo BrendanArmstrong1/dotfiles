@@ -6,7 +6,7 @@ char *externalpipe_sigusr1[] = {"/bin/sh", "-c", "externalpipe_buffer.sh st_stri
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 static char *font = "FuraCode Nerd Font Mono:pixelsize=18:antialias=true:autohint=true";
-static char *font2[] = { 
+static char *font2[] = {
 	"FuraCode Nerd Font Mono:pixelsize=18:antialias=true:autohint=true",
 	"Source Han Sans:pixelsize=11:antialias=true:autohint=true",
 	"Noto Color Emoji:pixelsize=15:antialias=true:autohint=true"
@@ -277,11 +277,11 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,							XK_A,						changealpha,	{.f = +0.05} },
 	{ TERMMOD,              XK_Up,          zoom,           {.f = +1} },
 	{ TERMMOD,              XK_Down,        zoom,           {.f = -1} },
-	{ TERMMOD,              XK_F,           zoom,           {.f = +1} },
-	{ TERMMOD,              XK_B,           zoom,           {.f = -1} },
-	{ TERMMOD,              XK_U,           zoom,           {.f = +2} },
-	{ TERMMOD,              XK_D,           zoom,           {.f = -2} },
-	{ MODKEY,               XK_g,           externalpipe,   {.v = openurlcmd } },
+	{ TERMMOD,              XK_F,           zoom,           {.f = +2} },
+	{ TERMMOD,              XK_B,           zoom,           {.f = -2} },
+	{ TERMMOD,              XK_U,           zoom,           {.f = +1} },
+	{ TERMMOD,              XK_D,           zoom,           {.f = -1} },
+	{ MODKEY,               XK_n,           externalpipe,   {.v = openurlcmd } },
 	{ MODKEY,               XK_y,           externalpipe,   {.v = copyurlcmd } },
 	{ MODKEY,               XK_o,           externalpipe,   {.v = copyoutput } },
 };

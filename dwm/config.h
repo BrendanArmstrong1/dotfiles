@@ -9,10 +9,10 @@ static const int focusonwheel       = 0;
 static char font[]            = "FuraCode Nerd Font Mono:size=10";
 static char dmenufont[]       = "FuraCode Nerd Font Mono:size=10";
 static const char *fonts[]          = { "monospace:size=10",
-										"Noto Color Emoji:size:16",
-										"FuraCode Nerd Font Mono:size=10",
-										"Source Han Sans:size=10",
-										};
+					"Noto Color Emoji:size:16",
+					"FuraCode Nerd Font Mono:size=10",
+					"Source Han Sans:size=10",
+					};
 static char normbgcolor[]           = "#222222";
 static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#bbbbbb";
@@ -43,9 +43,9 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance    title       tags mask     isfloating   monitor    float x,y,w,h         floatborderpx*/
-//	{ "Gimp",     NULL,       NULL,       0,            1,           -1,        50,50,1000,1000,        5 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1,        50,50,500,500,        5 },
+	 /* class      instance    title       tags mask     isfloating   monitor    float x,y,w,h         floatborderpx*/
+	{ "Gimp",     NULL,       NULL,       0,            1,           -1,        50,50,1000,1000,        5 },
+	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1,        50,50,500,500,          5 },
 };
 
 /* layout(s) */
@@ -110,7 +110,7 @@ static Key keys[] = {
 	{ Mod1Mask|MODKEY,         XK_p,      spawn,          SHCMD("pavucontrol") },
 	{ Mod1Mask|MODKEY,         XK_e,      spawn,          SHCMD("setsid st -e vim") },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY,                       XK_m,      spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_minus,  focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_equal,  focusstack,     {.i = -1 } },
@@ -120,17 +120,27 @@ static Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+	{ MODKEY,                       XK_h,	   focusmon,       {.i = -1 } },
+	{ MODKEY,                       XK_l,      focusmon,       {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_h,	   tagmon,         {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_l,	   tagmon,         {.i = +1 } },
+	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
+	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_j,      movestack,      {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } },
+	{ MODKEY,	                XK_n,      shiftviewclients, { .i = +1 } },
+	{ MODKEY,	                XK_e,	   shiftviewclients, { .i = -1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
 	{ MODKEY,                       XK_o,      incnmaster,     {.i = -1 } },
-	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
-	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
+	{ MODKEY,                       XK_u,      setmfact,       {.f = -0.05} },
+	{ MODKEY,                       XK_y,      setmfact,       {.f = +0.05} },
 	{ MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
-	{ MODKEY,                       XK_v,      killclient,     {0} },
+	{ MODKEY,                       XK_q,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
-	{ MODKEY,                       XK_space,  setlayout,      {0} },
+	{ MODKEY,                       XK_s,      setlayout,      {.v = &layouts[2]} },
+	{ MODKEY,                       XK_space,  setlayout,      {-1} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_Down,   moveresize,     {.v = "0x 25y 0w 0h" } },
 	{ MODKEY,                       XK_Up,     moveresize,     {.v = "0x -25y 0w 0h" } },
