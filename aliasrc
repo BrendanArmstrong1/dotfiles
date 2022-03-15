@@ -1,8 +1,10 @@
 # Aliases for terminal
 
-alias ls='ls --color=auto'
-alias la='ls -a --color=auto'
-alias ll='ls -alh --color=auto'
+alias ls='exa --color=automatic --icons'
+alias la='exa -a --color=automatic --icons'
+#alias ll='ls -alh --color=auto'
+alias ll='exa -lah --color=automatic --icons'
+alias lt='exa --tree --level=3 --icons'
 
 alias df='df -h'
 alias grep='grep --color'

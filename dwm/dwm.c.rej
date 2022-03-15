@@ -1,49 +1,13 @@
---- dwm.c
-+++ dwm.c
-@@ -138,14 +154,17 @@ struct Monitor {
- 	unsigned int seltags;
- 	unsigned int sellt;
- 	unsigned int tagset[2];
-+	TagState tagstate;
- 	int showbar;
- 	int topbar;
- 	Client *clients;
- 	Client *sel;
-+	Client *lastsel;
- 	Client *stack;
- 	Monitor *next;
- 	Window barwin;
- 	const Layout *lt[2];
-+	const Layout *lastlt;
- };
- 
- typedef struct {
-@@ -280,17 +302,27 @@ static void (*handler[LASTEvent]) (XEvent *) = {
- 	[UnmapNotify] = unmapnotify
- };
- static Atom wmatom[WMLast], netatom[NetLast];
-+static int epoll_fd;
-+static int dpy_fd;
- static int running = 1;
- static Cur *cursor[CurLast];
- static Clr **scheme;
- static Display *dpy;
- static Drw *drw;
--static Monitor *mons, *selmon;
-+static Monitor *mons, *selmon, *lastselmon;
- static Window root, wmcheckwin;
- 
-+#include "ipc.h"
-+
- /* configuration, allows nested code to access above variables */
- #include "config.h"
- 
-+#ifdef VERSION
-+#include "IPCClient.c"
-+#include "yajl_dumps.c"
-+#include "ipc.c"
-+#endif
-+
- /* compile-time check if all tags fit into an unsigned int bit array. */
- struct NumTags { char limitexceeded[LENGTH(tags) > 31 ? -1 : 1]; };
- 
+--- dwm.c	2021-10-02 14:22:28.034782413 +0100
++++ dwm.c	2021-10-02 14:27:54.599845767 +0100
+@@ -183,8 +183,10 @@ static void maprequest(XEvent *e);
+ static void monocle(Monitor *m);
+ static void motionnotify(XEvent *e);
+ static void movemouse(const Arg *arg);
++static unsigned int nexttag(void);
+ static Client *nexttiled(Client *c);
+ static void pop(Client *);
++static unsigned int prevtag(void);
+ static void propertynotify(XEvent *e);
+ static void quit(const Arg *arg);
+ static Monitor *recttomon(int x, int y, int w, int h);

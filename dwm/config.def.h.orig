@@ -6,14 +6,12 @@ static unsigned int snap      = 32;       /* snap pixel */
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
 static const int focusonwheel       = 0;
-static char font[]            = "FiraCode Nerd Font Mono:size=10";
-static char dmenufont[]       = "FiraCode Nerd Font Mono:size=10";
+static char font[]            = "FuraCode Nerd Font Mono:size=10";
+static char dmenufont[]       = "FuraCode Nerd Font Mono:size=10";
 static const char *fonts[]          = { "monospace:size=10",
 										"Noto Color Emoji:size:16",
-										"FiraCode Nerd Font Mono:size=10",
-										"Hack Nerd Font Mono:size=10",
+										"FuraCode Nerd Font Mono:size=10",
 										"Source Han Sans:size=10",
-										"Inconsolata Nerd Font Mono:size=10"
 										};
 static char normbgcolor[]           = "#222222";
 static char normbordercolor[]       = "#444444";
@@ -55,7 +53,7 @@ static float mfact     = 0.50; /* factor of master area size [0.05..0.95] */
 static int nmaster     = 1;    /* number of clients in master area */
 static int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
-static const int attachdirection = 0;    /* 0 default, 1 above, 2 aside, 3 below, 4 bottom, 5 top */
+static const int attachdirection = 3;    /* 0 default, 1 above, 2 aside, 3 below, 4 bottom, 5 top */
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
@@ -103,28 +101,32 @@ ResourcePref resources[] = {
 #include "movestack.c"
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ Mod1Mask|ControlMask,         XK_s,      spawn,          SHCMD("surf") },
-	{ Mod1Mask|ControlMask,         XK_1,      spawn,          SHCMD("changebg") },
-	{ Mod1Mask|ControlMask,         XK_2,      spawn,          SHCMD("bgswap.sh") },
-	{ Mod1Mask|ControlMask,         XK_e,      spawn,          SHCMD("dmenuEmoji.sh") },
-	{ Mod1Mask|ControlMask,         XK_b,      spawn,          SHCMD("brave") },
-	{ Mod1Mask|ControlMask,         XK_q,      spawn,          SHCMD("qutebrowser") },
-	{ Mod1Mask|ControlMask,         XK_d,      spawn,          SHCMD("discord") },
-	{ Mod1Mask|ControlMask,         XK_p,      spawn,          SHCMD("pavucontrol") },
+	{ Mod1Mask|MODKEY,         XK_1,      spawn,          SHCMD("changebg") },
+	{ Mod1Mask|MODKEY,         XK_2,      spawn,          SHCMD("bgswap.sh") },
+	{ Mod1Mask|MODKEY,         XK_3,      spawn,          SHCMD("dmenuEmoji.sh") },
+	{ Mod1Mask|MODKEY,         XK_b,      spawn,          SHCMD("brave") },
+	{ Mod1Mask|MODKEY,         XK_w,      spawn,          SHCMD("qutebrowser") },
+	{ Mod1Mask|MODKEY,         XK_d,      spawn,          SHCMD("discord") },
+	{ Mod1Mask|MODKEY,         XK_p,      spawn,          SHCMD("pavucontrol") },
+	{ Mod1Mask|MODKEY,         XK_e,      spawn,          SHCMD("emacsclient -c") },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
-	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
-	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
+	{ MODKEY,                       XK_minus,  focusstack,     {.i = +1 } },
+	{ MODKEY,                       XK_equal,  focusstack,     {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_minus,  movestack,      {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_equal,  movestack,      {.i = -1 } },
+	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
+	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
-	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
+	{ MODKEY,                       XK_o,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
-	{ MODKEY|ShiftMask,             XK_j,      movestack,      {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
-	{ MODKEY,                       XK_q,      killclient,     {0} },
+	{ MODKEY,                       XK_v,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
@@ -148,10 +150,6 @@ static Key keys[] = {
 	{ MODKEY|ControlMask|ShiftMask, XK_Right,  moveresizeedge, {.v = "R"} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
-	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
-	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
@@ -162,7 +160,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_r,      quit,           {1} },
-	{ MODKEY|ControlMask|ShiftMask, XK_q,      quit,           {0} }, 
+	{ MODKEY|ControlMask|ShiftMask, XK_v,      quit,           {0} }, 
 };
 
 /* button definitions */
@@ -183,6 +181,26 @@ static Button buttons[] = {
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 };
+
+
+static const char *ipcsockpath = "/tmp/dwm.sock";
+static IPCCommand ipccommands[] = {
+  IPCCOMMAND(  view,                1,      {ARG_TYPE_UINT}   ),
+  IPCCOMMAND(  toggleview,          1,      {ARG_TYPE_UINT}   ),
+  IPCCOMMAND(  tag,                 1,      {ARG_TYPE_UINT}   ),
+  IPCCOMMAND(  toggletag,           1,      {ARG_TYPE_UINT}   ),
+  IPCCOMMAND(  tagmon,              1,      {ARG_TYPE_UINT}   ),
+  IPCCOMMAND(  focusmon,            1,      {ARG_TYPE_SINT}   ),
+  IPCCOMMAND(  focusstack,          1,      {ARG_TYPE_SINT}   ),
+  IPCCOMMAND(  zoom,                1,      {ARG_TYPE_NONE}   ),
+  IPCCOMMAND(  incnmaster,          1,      {ARG_TYPE_SINT}   ),
+  IPCCOMMAND(  killclient,          1,      {ARG_TYPE_SINT}   ),
+  IPCCOMMAND(  togglefloating,      1,      {ARG_TYPE_NONE}   ),
+  IPCCOMMAND(  setmfact,            1,      {ARG_TYPE_FLOAT}  ),
+  IPCCOMMAND(  setlayoutsafe,       1,      {ARG_TYPE_PTR}    ),
+  IPCCOMMAND(  quit,                1,      {ARG_TYPE_NONE}   )
+};
+
 
 void
 setlayoutex(const Arg *arg)

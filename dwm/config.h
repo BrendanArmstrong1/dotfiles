@@ -1,8 +1,8 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static unsigned int borderpx  = 1;        /* border pixel of windows */
-static unsigned int snap      = 32;       /* snap pixel */
+static unsigned int borderpx  = 3;        /* border pixel of windows */
+static unsigned int snap      = 0;       /* snap pixel */
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
 static const int focusonwheel       = 0;
@@ -14,10 +14,10 @@ static const char *fonts[]          = { "monospace:size=10",
 					"Source Han Sans:size=10",
 					};
 static char normbgcolor[]           = "#222222";
-static char normbordercolor[]       = "#444444";
+static char normbordercolor[]       = "#000000";
 static char normfgcolor[]           = "#bbbbbb";
 static char selfgcolor[]            = "#eeeeee";
-static char selbordercolor[]        = "#005577";
+static char selbordercolor[]        = "#2283f2";
 static char selbgcolor[]            = "#005577";
 
 enum { SchemeNorm, SchemeCol1, SchemeCol2, SchemeCol3, SchemeCol4,
@@ -128,8 +128,10 @@ static Key keys[] = {
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_j,      movestack,      {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } },
-	{ MODKEY,	                XK_n,      shiftviewclients, { .i = +1 } },
-	{ MODKEY,	                XK_e,	   shiftviewclients, { .i = -1 } },
+	{ MODKEY,                       XK_n,      viewnext,       {0} },
+	{ MODKEY,                       XK_e,      viewprev,       {0} },
+	{ MODKEY|ShiftMask,             XK_n,	   tagtonext,      {0} },
+	{ MODKEY|ShiftMask,             XK_e,	   tagtoprev,      {0} },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
 	{ MODKEY,                       XK_o,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_u,      setmfact,       {.f = -0.05} },
@@ -169,8 +171,8 @@ static Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-	{ MODKEY|ShiftMask,             XK_r,      quit,           {1} },
-	{ MODKEY|ControlMask|ShiftMask, XK_v,      quit,           {0} },
+	{ MODKEY|ControlMask|ShiftMask, XK_r,      quit,           {1} },
+	{ MODKEY|ControlMask|ShiftMask, XK_q,      quit,           {0} },
 };
 
 /* button definitions */
