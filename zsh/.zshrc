@@ -86,7 +86,18 @@ jocd () {
         [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
     fi
 }
-bindkey -s '^o' 'jocd\n'
+bindkey -s '^n' 'jocd\n'
+
+lfcd () {
+    tmp="$(mktemp)"
+    lfub -last-dir-path="$tmp" "$@"
+    if [ -f "$tmp" ]; then
+        dir="$(cat "$tmp")"
+        rm -f "$tmp" >/dev/null
+        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
+    fi
+}
+bindkey -s '^o' 'lfcd\n'
 
 bindkey -s '^a' 'bc -lq\n'
 

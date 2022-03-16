@@ -9,33 +9,33 @@ if [ -n "$DISPLAY" ] && command -v ueberzug > /dev/null; then
     export joshuto_wrap_ueber_identifier="preview"
 
     function start_ueberzug {
-        mkfifo "${joshuto_wrap_ueber_fifo}"
-        tail --follow "$joshuto_wrap_ueber_fifo" | ueberzug layer  --parser bash &
-        echo "$!" > "$joshuto_wrap_pid_file"
-        mkdir -p "$joshuto_wrap_preview_meta"
+	mkfifo "${joshuto_wrap_ueber_fifo}"
+	tail --follow "$joshuto_wrap_ueber_fifo" | ueberzug layer  --parser bash &
+	echo "$!" > "$joshuto_wrap_pid_file"
+	mkdir -p "$joshuto_wrap_preview_meta"
     }
 
     function stop_ueberzug {
-        ueberzug_pid=`cat "$joshuto_wrap_pid_file"`
-        kill "$ueberzug_pid"
-        rm -rf "$joshuto_wrap_tmp"
+	ueberzug_pid=`cat "$joshuto_wrap_pid_file"`
+	kill "$ueberzug_pid"
+	rm -rf "$joshuto_wrap_tmp"
     }
 
     function show_image {
-        >"${joshuto_wrap_ueber_fifo}" declare -A -p cmd=( \
-                [action]=add [identifier]="${joshuto_wrap_ueber_identifier}" \
-                [x]="${2}" [y]="${3}" \
-                [width]="${4}" [height]="${5}" \
-                [path]="${1}")
+	>"${joshuto_wrap_ueber_fifo}" declare -A -p cmd=( \
+		[action]=add [identifier]="${joshuto_wrap_ueber_identifier}" \
+		[x]="${2}" [y]="${3}" \
+		[width]="${4}" [height]="${5}" \
+		[path]="${1}")
     }
 
     function remove_image {
-        >"${joshuto_wrap_ueber_fifo}" declare -A -p cmd=( \
-            [action]=remove [identifier]="${joshuto_wrap_ueber_identifier}")
+	>"${joshuto_wrap_ueber_fifo}" declare -A -p cmd=( \
+	    [action]=remove [identifier]="${joshuto_wrap_ueber_identifier}")
     }
 
     function get_preview_meta_file {
-        echo "$joshuto_wrap_preview_meta/$(echo "$1" | md5sum | sed 's/ //g')"
+	echo "$joshuto_wrap_preview_meta/$(echo "$1" | md5sum | sed 's/ //g')"
     }
 
     export -f get_preview_meta_file
