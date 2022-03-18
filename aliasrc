@@ -11,9 +11,10 @@ alias grep='grep --color'
 
 alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"'
 
-alias cim='vim'
-alias bim='vim'
-alias scim='sc-im'
+alias vim='nvim'
+alias vom='nvim'
+alias vin='nvim'
+alias von='nvim'
 
 alias lf="lfub"
 

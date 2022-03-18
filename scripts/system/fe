@@ -16,6 +16,6 @@ case "$ext" in
         zathura "$file"
         ;;
     *)
-        vim -c "cd! $dir" "$file"
+        nvim -c "cd! $dir" "$file"
         ;;
 esac

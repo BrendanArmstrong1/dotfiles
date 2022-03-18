@@ -5,7 +5,7 @@
 [[ -f ~/.config/zsh/.zshrc ]] && . ~/.config/zsh/.zshrc
 
 export PATH=$PATH:$HOME/.config/scripts:$HOME/.config/scripts/blocks:$HOME/.config/scripts/utils:$HOME/.config/scripts/programs:$HOME/.config/scripts/system:$HOME/.config/emacs/bin:$HOME/.local/bin:$HOME/.local/share/gem/ruby/3.0.0/bin:$HOME/.local/share/cargo/bin
-export EDITOR=vim
+export EDITOR=nvim
 export TERMINAL=st
 export BROWSER=google-chrome-stable
 
@@ -20,45 +20,43 @@ export XINITRC="$XDG_CONFIG_HOME/X11/xinitrc"
 export EXA_COLORS="da=35"
 
 # This is the list for lf icons:
-export LF_ICONS="di=📁:\
-fi=📃:\
+export LF_ICONS="di=:\
+fi=:\
+tw=:\
+ow=:\
+ln=:\
+or=❌:\
+ex=:\
 *.rs=:\
 *.c=:\
 *.cpp=:\
 *.py=:\
 *.vim=:\
-*.sh=:\
+*.sh=:\
 *.js=:\
 *.html=:\
 *.css=:\
-*.vim=:\
-tw=🤝:\
-ow=📂:\
-ln=⛓:\
-or=❌:\
-ex=🎯:\
-*.txt=✍:\
-*.mom=✍:\
-*.me=✍:\
-*.ms=✍:\
-*.png=🖼:\
-*.webp=🖼:\
-*.ico=🖼:\
-*.jpg=📸:\
-*.jpe=📸:\
-*.jpeg=📸:\
-*.gif=🖼:\
-*.svg=🗺:\
-*.tif=🖼:\
-*.tiff=🖼:\
-*.xcf=🖌:\
-*.html=🌎:\
 *.xml=📰:\
+*.txt=:\
+*.json=:\
+*.mom=:\
+*.me=:\
+*.ms=:\
+*.png=:\
+*.webp=:\
+*.ico=:\
+*.jpg=:\
+*.jpe=:\
+*.jpeg=:\
+*.gif=:\
+*.svg=:\
+*.tif=:\
+*.tiff=:\
+*.xcf=:\
 *.gpg=🔒:\
-*.css=🎨:\
-*.pdf=📚:\
-*.djvu=📚:\
-*.epub=📚:\
+*.pdf=:\
+*.djvu=:\
+*.epub=:\
 *.csv=📓:\
 *.xlsx=📓:\
 *.tex=📜:\
@@ -98,8 +96,8 @@ ex=🎯:\
 *.nfo=ℹ:\
 *.info=ℹ:\
 *.log=📙:\
-*.iso=📀:\
-*.img=📀:\
+*.iso=:\
+*.img=:\
 *.bib=🎓:\
 *.ged=👪:\
 *.part=💔:\
