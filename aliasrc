@@ -1,6 +1,5 @@
 # Aliases for terminal
 
-alias ls='exa --color=automatic --icons'
 alias la='exa -a --color=automatic --icons'
 #alias ll='ls -alh --color=auto'
 alias ll='exa -lah --color=automatic --icons'
@@ -11,10 +10,9 @@ alias grep='grep --color'
 
 alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"'
 
-alias vim='nvim'
-alias vom='nvim'
-alias vin='nvim'
-alias von='nvim'
+alias vom='vim'
+alias vin='vim'
+alias von='vim'
 
 alias lf="lfub"
 

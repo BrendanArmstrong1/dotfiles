@@ -172,7 +172,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ControlMask|ShiftMask, XK_r,      quit,           {1} },
-	{ MODKEY|ControlMask|ShiftMask, XK_q,      quit,           {0} },
+	{ MODKEY|ControlMask|ShiftMask, XK_o,      quit,           {0} },
 };
 
 /* button definitions */

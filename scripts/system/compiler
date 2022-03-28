@@ -13,25 +13,25 @@ C_processor() {
         make &&
         "${root}/Output"
     else
-        gcc -Wall -lm -o "${fileroot}" "$fullpath" && 
+        gcc -Wall -lm -o "${fileroot}" "$fullpath" &&
         "${fileroot}"
     fi
 }
 
 Rust_processor() {
-    root="$(pwd)" 
+    root="$(pwd)"
     if [ -e "$root"/Cargo.toml ]
     then
         cargo run
     else
-        rustc "$fullpath" && 
+        rustc "$fullpath" &&
         "${fileroot}"
     fi
 }
 
 Latex_processor() {
     [ -d "$dir"/FileStorage ] || mkdir "$dir/FileStorage"
-    pdflatex -output-directory "$dir/FileStorage" "$fullpath" 
+    pdflatex -halt-on-error -output-directory "$dir/FileStorage" "$fullpath" || notify-send "Compilation Error"
     mv "$dir/FileStorage/${fileroot##*/}.pdf" "$dir"
     pidof zathura || zathura "$fileroot.pdf" &
 }
@@ -98,4 +98,3 @@ case "$extension" in
     "tex") Latex_processor ;;
     *) echo "Sorry .$extension is not in my handle list" ;;
 esac
-
