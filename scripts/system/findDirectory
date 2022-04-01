@@ -1,11 +1,10 @@
 #!/bin/sh
 
 
-dir="$(find ~/ -regextype posix-extended \
-        -type d -a -regex '.*/(H|.local|.cache|node_modules|.git|__pycache__|.mozilla|VirtualBox.*)' -prune -o \
-        -type f ! -regex '.*\.(mp3|png|jpeg|jpg|log|aux|tdb|out|gz|zip)' \( -path '*scripts*/*' -o ! -executable \) \
-        -printf '%h\n' | uniq | fzf)"
+dir="$(fd -H -E '.cache/' -E '.backups/' -E '.local/' -E '.rustup/' -E '.git/' \
+    -td -c always --no-ignore --search-path "$HOME/" | \
+    fzf --reverse --height=20 --ansi)"
 
-[ "$dir" = "" ] && exit 1
+[ "$dir" = "" ] && return
 
 cd "$dir"

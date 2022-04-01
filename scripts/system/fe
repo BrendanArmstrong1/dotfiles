@@ -1,10 +1,8 @@
 #!/bin/sh
 
-
-file="$(find ~/ -regextype posix-extended \
-        -type d -a -regex '.*/(H|.local|.cache|.config/.*/.*/.*|node_modules|.git|__pycache__|.mozilla|VirtualBox.*)' -prune -o \
-        -type f ! -size 0 ! -regex '.*\.(mp3|png|jpeg|jpg|log|aux|tdb|out|gz|zip)' \( -path '*scripts*/*' -o ! -executable \) \
-        | fzf)"
+file="$(fd -H -E 'node_modules/' -E 'Cache/' -E '.cache/' -E '.local/' -E 'H/' -E '.rustup/' -E '*.pyc' -E '.git/' \
+    -tf --no-ignore -c always --search-path "$HOME/" | \
+    fzf --reverse --height=20 --ansi)"
 
 ext="${file##*.}"
 dir="${file%/*}"
@@ -16,6 +14,6 @@ case "$ext" in
         zathura "$file"
         ;;
     *)
-        nvim -c "cd! $dir" "$file"
+        vim -c "cd! $dir" "$file"
         ;;
 esac
