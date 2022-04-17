@@ -5,7 +5,7 @@
 [[ -f ~/.config/zsh/.zshrc ]] && . ~/.config/zsh/.zshrc
 
 export PATH=$PATH:$HOME/.config/scripts:$HOME/.config/scripts/blocks:$HOME/.config/scripts/utils:$HOME/.config/scripts/programs:$HOME/.config/scripts/system:$HOME/.config/emacs/bin:$HOME/.local/bin:$HOME/.local/share/gem/ruby/3.0.0/bin:$HOME/.local/share/cargo/bin
-export EDITOR=nvim
+export EDITOR=vim
 export TERMINAL=st
 export BROWSER=google-chrome-stable
 

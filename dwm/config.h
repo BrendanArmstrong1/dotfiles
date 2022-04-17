@@ -142,7 +142,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_s,      setlayout,      {.v = &layouts[2]} },
-	{ MODKEY,                       XK_space,  setlayout,      {-1} },
+	/* { MODKEY,                       XK_space,  setlayout,      {+1} }, Causes segfault!!*/
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_Down,   moveresize,     {.v = "0x 25y 0w 0h" } },
 	{ MODKEY,                       XK_Up,     moveresize,     {.v = "0x -25y 0w 0h" } },
@@ -171,8 +171,8 @@ static Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-	{ MODKEY|ControlMask|ShiftMask, XK_r,      quit,           {1} },
-	{ MODKEY|ControlMask|ShiftMask, XK_o,      quit,           {0} },
+	{ MODKEY|Mod1Mask|ControlMask|ShiftMask, XK_r,      quit,           {1} },
+	{ MODKEY|Mod1Mask|ControlMask|ShiftMask, XK_q,      quit,           {0} },
 };
 
 /* button definitions */

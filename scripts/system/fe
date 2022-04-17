@@ -1,6 +1,6 @@
 #!/bin/sh
 
-file="$(fd -H -E 'node_modules/' -E 'Cache/' -E '.cache/' -E '.local/' -E 'H/' -E '.rustup/' -E '*.pyc' -E '.git/' \
+file="$(fd -H -E 'undodir/' -E 'node_modules/' -E 'Cache/' -E '.cache/' -E '.local/' -E 'H/' -E '.rustup/' -E '*.pyc' -E '.git/' \
     -tf --no-ignore -c always --search-path "$HOME/" | \
     fzf --reverse --height=20 --ansi)"
 
@@ -10,6 +10,9 @@ dir="${file%/*}"
 [ "$file" = "" ] && exit 1
 
 case "$ext" in
+    png|jpg|jpeg)
+        nsxiv "$file"
+        ;;
     pdf)
         zathura "$file"
         ;;
