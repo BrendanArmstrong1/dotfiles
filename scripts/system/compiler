@@ -19,14 +19,34 @@ C_processor() {
 }
 
 Rust_processor() {
-    root="$(pwd)"
-    if [ -e "$root"/Cargo.toml ]
-    then
-        cargo run
-    else
-        rustc "$fullpath" &&
-        "${fileroot}"
-    fi
+    cwd="$(pwd)"
+    while [ "$HOME" != "$cwd" ]
+    do
+        if [ -e "$cwd"/Cargo.toml ]
+        then
+            cd "$cwd" || return
+            cargo run
+            return
+        else
+            cwd="$(dirname "$cwd")"
+        fi
+    done
+    rustc "$fullpath" &&
+    "${fileroot}"
+}
+
+Go_processor() {
+    cwd="$(pwd)"
+    while [ "$HOME" != "$cwd" ]
+    do
+        if [ -e "$cwd"/go.mod ]
+        then
+            cargo run
+        else
+            rustc "$fullpath" &&
+            "${fileroot}"
+        fi
+    done
 }
 
 Latex_processor() {
@@ -95,6 +115,7 @@ case "$extension" in
     "html"|"css") html_processor ;;
     "c")  C_processor ;;
     "rs") Rust_processor ;;
+    "go") Go_processor ;;
     "tex") Latex_processor ;;
     *) echo "Sorry .$extension is not in my handle list" ;;
 esac
