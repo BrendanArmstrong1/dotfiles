@@ -3,8 +3,9 @@
 *.alphaOffset: 0.0
 
 !! Set a default font and font size as below:
-*.font: FiraCode Nerd Font Mono:size=16
+!! *.font: FiraCode Nerd Font Mono:size=16
 
+st.font: ComicCode Nerd Font:size=18
 st.termname: st-256color
 st.borderpx: 2
 

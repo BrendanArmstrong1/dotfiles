@@ -41,12 +41,14 @@ Go_processor() {
     do
         if [ -e "$cwd"/go.mod ]
         then
-            cargo run
+            cd "$cwd" || return
+            go run .
+            return
         else
-            rustc "$fullpath" &&
-            "${fileroot}"
+            cwd="$(dirname "$cwd")"
         fi
     done
+    go run "$fullpath"
 }
 
 Latex_processor() {
