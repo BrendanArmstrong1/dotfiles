@@ -1,5 +1,0 @@
-current token: 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
-
-git config --global credential.helper store #permament
-git config --global credential.helper cache
-git config --global --unset credential.helper
