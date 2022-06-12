@@ -1,0 +1,11 @@
+[user]
+	email = Brendan.Armstrong@mail.com
+	name = Brendan Armstrong
+[credential]
+	helper = store
+[github]
+	user = BrendanArmstrong1
+[alias]
+	hub = !hub
+[init]
+	defaultBranch = main

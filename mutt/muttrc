@@ -1,0 +1,7 @@
+# vim: filetype=neomuttrc
+source /usr/local/share/mutt-wizard/mutt-wizard.muttrc
+source /home/brendan/.config/mutt/accounts/brendanarmstrong@proton.me.muttrc
+macro index,pager i2 '<sync-mailbox><enter-command>source /home/brendan/.config/mutt/accounts/brendan.armstrong@mail.com.muttrc<enter><change-folder>!<enter>;<check-stats>' "switch to brendan.armstrong@mail.com"
+macro index,pager i4 '<sync-mailbox><enter-command>source /home/brendan/.config/mutt/accounts/email@brendanarmstrong.xyz.muttrc<enter><change-folder>!<enter>;<check-stats>' "switch to email@brendanarmstrong.xyz"
+macro index,pager i3 '<sync-mailbox><enter-command>source /home/brendan/.config/mutt/accounts/bjarms56@gmail.com.muttrc<enter><change-folder>!<enter>;<check-stats>' "switch to bjarms56@gmail.com"
+macro index,pager i1 '<sync-mailbox><enter-command>source /home/brendan/.config/mutt/accounts/brendanarmstrong@proton.me.muttrc<enter><change-folder>!<enter>;<check-stats>' "switch to brendanarmstrong@proton.me"

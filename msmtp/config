@@ -1,0 +1,48 @@
+account brendan.armstrong@mail.com
+host smtp.mail.com
+port 587
+from brendan.armstrong@mail.com
+user brendan.armstrong@mail.com
+passwordeval "pass brendan.armstrong@mail.com"
+auth on
+tls on
+tls_trust_file	/etc/ssl/certs/ca-certificates.crt
+logfile /home/brendan/.config/msmtp/msmtp.log
+# tls_starttls
+
+account email@brendanarmstrong.xyz
+host mail.brendanarmstrong.xyz
+port 465
+from email@brendanarmstrong.xyz
+user email@brendanarmstrong.xyz
+passwordeval "pass email@brendanarmstrong.xyz"
+auth on
+tls on
+tls_trust_file	/etc/ssl/certs/ca-certificates.crt
+logfile /home/brendan/.config/msmtp/msmtp.log
+tls_starttls off
+
+account bjarms56@gmail.com
+host smtp.gmail.com
+port 587
+from bjarms56@gmail.com
+user bjarms56@gmail.com
+passwordeval "pass bjarms56@gmail.com"
+auth on
+tls on
+tls_trust_file	/etc/ssl/certs/ca-certificates.crt
+logfile /home/brendan/.config/msmtp/msmtp.log
+# tls_starttls
+
+account brendanarmstrong@proton.me
+host 127.0.0.1
+port 1025
+from brendanarmstrong@proton.me
+user brendanarmstrong@proton.me
+passwordeval "pass brendanarmstrong@proton.me"
+auth login
+tls on
+tls_trust_file	/etc/ssl/certs/ca-certificates.crt
+logfile /home/brendan/.config/msmtp/msmtp.log
+tls_fingerprint E6:F4:6D:46:8B:44:C0:AE:F3:EC:8B:3F:0E:63:4B:56:E1:42:72:D5:E6:BB:D0:DA:33:9B:B4:35:B0:66:FB:EA
+
