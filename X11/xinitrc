@@ -1,0 +1,10 @@
+xset r rate 240 50 &
+monitorSwap
+fehbg &
+dwmblocks &
+dunst & 
+transmission-daemon &
+picom -b &
+protonstuff &
+xrdb -merge ~/.config/X11/xresources
+exec dwm

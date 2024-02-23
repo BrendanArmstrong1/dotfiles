@@ -1,0 +1,5 @@
+#!/bin/sh
+
+link=$(xclip -selection clipboard -o -)
+
+transmission-remote -a "$link"

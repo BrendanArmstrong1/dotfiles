@@ -1,0 +1,214 @@
+# Note on Image Previews
+#
+# 1. ueberzug must be installed.
+# 2. The scope file (~/.config/lf/scope for me), must have a command similar to
+#    mine to generate ueberzug images.
+# 3. A `set cleaner` line as below is a cleaner script.
+# 4. lf should be started through a wrapper script (~/.local/bin/lfub for me)
+#    that creates the environment for ueberzug. This command can be be aliased
+#    in your shellrc (`alias lf="lfub") or if set to a binding, should be
+#    called directly instead of normal lf.
+
+# Basic vars
+set shell zsh
+set shellopts '-euy'
+set ifs "\n"
+set scrolloff 10
+set incsearch true
+set drawbox
+set icons
+set period 1
+set hiddenfiles ".*:*.aux:*.log:*.bbl:*.bcf:*.blg:*.run.xml"
+set cleaner '~/.config/lf/cleaner'
+set previewer '~/.config/lf/scope'
+set cursorpreviewfmt "\033[7;2m"
+
+# cmds/functions
+
+cmd on-cd &{{
+    bash -c
+    # display git repository status in your prompt
+    source /usr/share/git/completion/git-prompt.sh
+    GIT_PS1_SHOWDIRTYSTATE=auto
+    GIT_PS1_SHOWSTASHSTATE=auto
+    GIT_PS1_SHOWUNTRACKEDFILES=auto
+    GIT_PS1_SHOWUPSTREAM=auto
+    GIT_PS1_COMPRESSSPARSESTATE=auto
+    git=$(__git_ps1 " [GIT BRANCH:> %s]") || true
+    fmt="\033[32;1m%u@%h\033[0m:\033[34;1m%w\033[0m\033[33;1m$git\033[0m"
+    lf -remote "send $id set promptfmt \"$fmt\""
+}}
+
+
+cmd newfold ${{
+    set -f
+    printf "Directory name: "
+    read newd
+    mkdir -- "$newd"
+    mv -- $fx "$newd"
+}}
+
+cmd open ${{
+    case $(file --mime-type "$(readlink -f $f)" -b) in
+      image/vnd.djvu|application/pdf|application/postscript) setsid -f zathura $fx >/dev/null 2>&1 ;;
+        text/*|application/json|application/octet-stream|application/x-ndjson|inode/x-empty|application/javascript) $EDITOR $fx;;
+	application/vnd.openxmlformats-officedocument.spreadsheetml.sheet) localc $fx ;;
+	application/x-sc) sc-im $fx ;;
+	image/x-xcf) setsid -f gimp $f >/dev/null 2>&1 ;;
+	image/svg+xml) display -- $f ;;
+	image/*) rotdir $f | grep -i "\.\(png\|jpg\|jpeg\|gif\|webp\|ppm\|pgm\|pbm\|tif\|ico\)\(_large\)*$" |
+		setsid -f nsxiv -aio 2>/dev/null | while read -r file; do
+			[ -z "$file" ] && continue
+			lf -remote "send select \"$file\""
+			lf -remote "send toggle"
+		done &
+		;;
+	audio/*) mpv --audio-display=no $f ;;
+	video/*) setsid -f mpv $f -quiet >/dev/null 2>&1 ;;
+	application/pdf|application/vnd*|application/epub*) setsid -f zathura $fx >/dev/null 2>&1 ;;
+	application/pgp-encrypted) $EDITOR $fx ;;
+        *) for f in $fx; do setsid -f $OPENER $f >/dev/null 2>&1; done;;
+    esac
+}}
+
+cmd mkdir $mkdir -p "$(echo $* | tr ' ' '\ ')"
+cmd touch %touch "$@"
+
+cmd make-executable ${{
+	set -f
+	chmod +x $fx
+}}
+
+cmd extract ${{
+	clear; tput cup $(($(tput lines)/3)); tput bold
+	set -f
+	printf "%s\n\t" "$fx"
+	printf "extract?[y/N]"
+	read and
+	[ $and = "y" ] && aunpack $fx
+}}
+
+cmd fzf_file_search ${{
+    search_result="$(fd . -H -E 'undodir/' -E \
+      'node_modules/' -E 'Cache/' -E '.cache/' \
+      -E '.local/' -E 'H/' -E '.rustup/' -E \
+      '*.pyc' -E '.git/' -tf --no-ignore -c always \
+      | fzf --ansi --preview='bat --color=always --style=numbers {}' --layout=reverse --header 'Search for files' \
+      | sed 's/\s/\\ /g')"
+    [ ! -z "$search_result" ] && lf -remote "send $id select \"$search_result\""
+}}
+
+cmd fzf_search ${{
+    search_result="$( \
+        RG_PREFIX="rg --no-ignore --no-heading --color=always \
+            --smart-case --glob '!.git' --glob '!node_modules/' \
+            --column --line-number"
+        FZF_DEFAULT_COMMAND="$RG_PREFIX ''" \
+            fzf --bind "change:reload:sleep 0.1; $RG_PREFIX {q} || true" \
+            --ansi --delimiter=: --preview='~/.config/lf/fzf-bat-preview {1} {2}' \
+            --layout=reverse --header 'Search in files'
+    )"
+    res="$(echo $search_result | cut -d':' -f1)"
+    row="$(echo $search_result | cut -d':' -f2)"
+    col="$(echo $search_result | cut -d':' -f3)"
+    [ ! -z "$res" ] && $EDITOR "$res" "+call cursor($row,$col)" "+normal zz"
+    # [ ! -z "$res" ] && lf -remote "send $id select \"$res\""
+}}
+
+cmd bulk-rename ${{
+	index=$(mktemp /tmp/lf-bulk-rename-index.XXXXXXXXXX)
+	if [ -n "${fs}" ]; then
+		echo "$fs" > $index
+	else
+		echo "$(ls "$(dirname $f)" | tr ' ' "\n")" > $index
+	fi
+	index_edit=$(mktemp /tmp/lf-bulk-rename.XXXXXXXXXX)
+	cat $index > $index_edit
+	$EDITOR $index_edit
+	if [ $(cat $index | wc -l) -eq $(cat $index_edit | wc -l) ]; then
+		max=$(($(cat $index | wc -l)+1))
+		counter=1
+		while [ $counter -le $max ]; do
+			a="$(cat $index | sed "${counter}q;d")"
+			b="$(cat $index_edit | sed "${counter}q;d")"
+			counter=$(($counter+1))
+			
+			[ "$a" = "$b" ] && continue
+			[ -e "$b" ] && echo "File exists: $b" && continue
+			mv "$a" "$b"
+		done
+	else
+		echo "Number of lines must stay the same"
+	fi
+	rm $index $index_edit
+}}
+
+cmd moveto ${{
+	clear; tput cup $(($(tput lines)/3)); tput bold
+	set -f
+	clear; echo "Move to where?"
+	dest="$(sed -e 's/\s*#.*//' -e '/^$/d' -e 's/^\S*\s*//' ${XDG_CONFIG_HOME:-$HOME/.config}/shell/bm-dirs | fzf | sed 's|~|$HOME|')" &&
+	for x in $fx; do
+		eval mv -iv \"$x\" \"$dest\"
+	done &&
+	notify-send "🚚 File(s) moved." "File(s) moved to $dest."
+}}
+
+cmd copyto ${{
+	clear; tput cup $(($(tput lines)/3)); tput bold
+	set -f
+	clear; echo "Copy to where?"
+	dest="$(sed -e 's/\s*#.*//' -e '/^$/d' -e 's/^\S*\s*//' ${XDG_CONFIG_HOME:-$HOME/.config}/shell/bm-dirs | fzf | sed 's|~|$HOME|')" &&
+	for x in $fx; do
+		eval cp -ivr \"$x\" \"$dest\"
+	done &&
+	notify-send "📋 File(s) copied." "File(s) copies to $dest."
+}}
+
+cmd bulkrename $vidir
+cmd open-with %"$@" $fx
+# Bindings
+map ` push :open-with<space>
+map <c-f> :fzf_file_search
+map <c-s> :fzf_search
+map D delete
+map E extract
+map C copyto
+# map F newfold
+map M moveto
+map O push :mkdir<space>
+map o push :touch<space>
+
+map R reload
+map <enter> shell
+map x $$f
+map X !$f
+map <c-x> make-executable
+
+map A rename # at the very end
+map c push A<c-u> # new rename
+map I push A<c-a> # at the very beginning
+map i push A<a-b><a-b><a-f> # before extension
+map a push A<a-b> # after extension
+map B bulk-rename
+
+map <c-e> push jjjjj
+map <c-y> push kkkkk
+map V push :!nvim<space>
+
+map W $setsid -f $TERMINAL >/dev/null 2>&1
+
+map Y $printf "%s" "$fx" | xclip -selection clipboard
+
+map gm newfold
+map gh cd ~
+map gc cd ~/.config
+map gp cd ~/S
+map gb cd ~/H/MediaStorage/backgrounds
+map gd cd ~/Downloads
+map gl cd ~/S/projects/
+map gs set hidden!
+map gS cd ~/Documents/Screenshots/
+
+# Source Bookmarks
+# source "~/.config/lf/shortcutrc"
