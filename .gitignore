@@ -3,7 +3,6 @@
 !.gitignore
 !aliasrc
 !picom.conf
-!fzf/
 !nvim/
 !tmux/
 !X11/
