@@ -23,5 +23,10 @@ for i in "$@"; do
 	-s | --select)
 		scrot --line mode=edge --select -F "$file"
 		;;
+  -w | --wiki)
+    scrot '/tmp/%F_%T_$wx$h.png' --line mode=edge --select -e 'xclip -selection clipboard -target image/png -i $f'
+    file_name=$(: | dmenu -i -p "File Name:" | tr ' ' '_')
+    xclip -selection clipboard -o >> "$HOME/S/new_site/static/$file_name.png"
+    echo -n "(/$file_name.png)" | xclip -selection clipboard
 	esac
 done

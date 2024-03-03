@@ -110,6 +110,7 @@ static Key keys[] = {
 	{ Mod1Mask|MODKEY,         XK_5,      spawn,          SHCMD("screenshot.sh --blur") },
 	{ Mod1Mask|MODKEY,         XK_6,      spawn,          SHCMD("screenshot.sh --hide") },
 	{ Mod1Mask|MODKEY,         XK_7,      spawn,          SHCMD("screenshot.sh --full") },
+	{ Mod1Mask|MODKEY,         XK_8,      spawn,          SHCMD("screenshot.sh --wiki") },
 	{ Mod1Mask|MODKEY,         XK_c,      spawn,          SHCMD("screen_to_clipboard.sh") },
 	{ Mod1Mask|MODKEY,         XK_b,      spawn,          SHCMD("google-chrome-stable") },
 	{ Mod1Mask|MODKEY,         XK_w,      spawn,          SHCMD("qutebrowser") },
