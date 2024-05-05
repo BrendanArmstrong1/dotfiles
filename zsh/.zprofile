@@ -16,6 +16,9 @@ export FZF_CTRL_T_OPTS="--reverse --height=30 --color=bg+:#343d46,gutter:-1,poin
 export FZF_ALT_C_COMMAND='fd --type d . --color=never --hidden'
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -50'"
 
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export MANROFFOPT="-c"
+
 export GOPATH="$HOME/S/Go"
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export LESSKEY="$XDG_CONFIG_HOME/less/lesskey"

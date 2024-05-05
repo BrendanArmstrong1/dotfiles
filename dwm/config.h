@@ -1,6 +1,8 @@
 /* See LICENSE file for copyright and license details. */
 // clang-format off
 
+#define SESSION_FILE "/tmp/dwm-session"
+
 /* appearance */
 static unsigned int borderpx  = 3;        /* border pixel of windows */
 static unsigned int snap      = 0;       /* snap pixel */
@@ -9,7 +11,8 @@ static int topbar             = 1;        /* 0 means bottom bar */
 static const int focusonwheel       = 0;
 static char font[]            = "FuraCode Nerd Font Mono:size=10";
 static char dmenufont[]       = "FuraCode Nerd Font Mono:size=10";
-static const char *fonts[]          = { "monospace:size=10",
+static const char *fonts[] = {
+          "monospace:size=10",
 					"Noto Color Emoji:size:16",
 					"FuraCode Nerd Font Mono:size=10",
 					"Source Han Sans:size=10",
@@ -26,7 +29,7 @@ enum { SchemeNorm, SchemeCol1, SchemeCol2, SchemeCol3, SchemeCol4,
 
 static char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
+	[SchemeNorm]  = { normfgcolor,      normbgcolor, normbordercolor },
 	[SchemeCol1]  = { normfgcolor,      normbgcolor, normbordercolor },
 	[SchemeCol2]  = { normfgcolor,      normbgcolor, normbordercolor },
 	[SchemeCol3]  = { normfgcolor,      normbgcolor, normbordercolor },
@@ -49,6 +52,7 @@ static const Rule rules[] = {
 	{ "gnuplot-qt", NULL,     NULL,       0,            1,           -1,        -1,-1,-1,-1,           -1 },
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1,        50,50,1000,1000,        5 },
 	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1,        50,50,500,500,          5 },
+	{ "St",       NULL, "floating",       0,            1,           -1,        -1,-1,-1,-1,            5 },
 };
 
 /* layout(s) */
@@ -113,10 +117,11 @@ static Key keys[] = {
 	{ Mod1Mask|MODKEY,         XK_8,      spawn,          SHCMD("screenshot.sh --wiki") },
 	{ Mod1Mask|MODKEY,         XK_c,      spawn,          SHCMD("screen_to_clipboard.sh") },
 	{ Mod1Mask|MODKEY,         XK_b,      spawn,          SHCMD("google-chrome-stable") },
-	{ Mod1Mask|MODKEY,         XK_w,      spawn,          SHCMD("qutebrowser") },
+	/* { Mod1Mask|MODKEY,         XK_w,      spawn,          SHCMD("qutebrowser") }, */
 	{ Mod1Mask|MODKEY,         XK_s,      spawn,          SHCMD("steam") },
 	{ Mod1Mask|MODKEY,         XK_d,      spawn,          SHCMD("discord") },
 	{ Mod1Mask|MODKEY,         XK_p,      spawn,          SHCMD("pavucontrol") },
+	{ Mod1Mask|MODKEY,         XK_f,      spawn,          SHCMD("thunar") },
 	{ Mod1Mask|MODKEY,         XK_i,      spawn,          SHCMD("Audio_Swap.sh") },
 	{ MODKEY,                       XK_Insert, spawn,          SHCMD("xdotool type $(grep -v '^#' ~/S/Documents/snippets | dmenu -i -l 50 | cut -d' ' -f1)") },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },

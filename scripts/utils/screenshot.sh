@@ -25,8 +25,17 @@ for i in "$@"; do
 		;;
   -w | --wiki)
     scrot '/tmp/%F_%T_$wx$h.png' --line mode=edge --select -e 'xclip -selection clipboard -target image/png -i $f'
-    file_name=$(: | dmenu -i -p "File Name:" | tr ' ' '_')
-    xclip -selection clipboard -o >> "$HOME/S/new_site/static/$file_name.png"
-    echo -n "(/$file_name.png)" | xclip -selection clipboard
+    full_file_name=$(: | dmenu -i -p "File Name:" | tr ' ' '_')
+    static_location="$HOME/S/Wiki/static"
+    base_name=$(basename "$full_file_name")
+    dir_name=$(dirname "$full_file_name")
+    if [ "$dir_name" != '.' ]; then
+      mkdir -p "$static_location/$dir_name"
+      xclip -selection clipboard -o >> "$static_location/$dir_name/$base_name.png"
+      echo -n "(/$dir_name/$base_name.png)" | xclip -selection clipboard
+    else
+      xclip -selection clipboard -o >> "$static_location/$base_name.png"
+      echo -n "(/$base_name.png)" | xclip -selection clipboard
+    fi
 	esac
 done
