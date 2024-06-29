@@ -39,7 +39,7 @@
   "ui.dark_theme_variant": true,
   "ui.rendered_tile_cache_size": 16384,
   "saving.default_format": "openraster",
-  "brushmanager.selected_brush": "classic/dry_brush",
+  "brushmanager.selected_brush": "deevad/Smooth-dip-pen_copy",
   "brushmanager.selected_groups": [],
   "frame.color_rgba": [
     0.12,
@@ -57,15 +57,60 @@
     "left_sidebar": {
       "groups": [
         {
+          "tools": [
+            [
+              "MyPaintLayersTool"
+            ]
+          ],
+          "active_page": 0,
+          "w": 320,
+          "h": 412
+        },
+        {
+          "tools": [
+            [
+              "MyPaintBrushGroupTool",
+              "Experimental"
+            ]
+          ],
+          "active_page": 0,
+          "w": 320,
+          "h": 314
+        },
+        {
+          "tools": [
+            [
+              "MyPaintBrushGroupTool",
+              "favorites"
+            ]
+          ],
+          "active_page": 0,
+          "w": 320,
+          "h": 314
+        },
+        {
           "tools": [],
           "active_page": -1
         }
       ],
-      "w": 23,
+      "w": 320,
       "h": 1310
     },
     "right_sidebar": {
       "groups": [
+        {
+          "tools": [
+            [
+              "MyPaintWashColorChangerTool"
+            ],
+            [
+              "MyPaintHCYWheelTool"
+            ]
+          ],
+          "active_page": 1,
+          "w": 331,
+          "h": 314
+        },
         {
           "tools": [
             [
@@ -74,33 +119,32 @@
             ]
           ],
           "active_page": 0,
-          "w": 237,
+          "w": 331,
           "h": 314
         },
         {
           "tools": [
             [
-              "MyPaintBrushGroupTool",
-              "Classic"
+              "MyPaintModeOptionsTool"
             ]
           ],
           "active_page": 0,
-          "w": 237,
-          "h": 984
+          "w": 331,
+          "h": 549
         },
         {
           "tools": [],
           "active_page": -1
         }
       ],
-      "w": 237,
+      "w": 331,
       "h": 1310
     },
     "floating": [],
     "position": {
-      "x": 4280,
+      "x": 2560,
       "y": 21,
-      "w": 1714,
+      "w": 3434,
       "h": 1413
     },
     "autohide": true,
@@ -141,7 +185,7 @@
     "Brendan Split Keyboard:mouse:4": {},
     "ZMK Project Brendan Split Keyboard:mouse:4": {}
   },
-  "colors.current": "#e5133b",
+  "colors.current": "#0e41b9",
   "colors.palette": {
     "name": "MyPaint Default",
     "columns": 7,
@@ -457,11 +501,11 @@
     ]
   },
   "colors.history": [
-    "#e5123b",
-    "#e5123b",
-    "#e5123b",
-    "#e5123b",
-    "#e5123b"
+    "#ff0000",
+    "#124aff",
+    "#afb045",
+    "#0a62a8",
+    "#0e40b9"
   ],
   "ui.support_smooth_scrolling": true,
   "ui.blink_layers": true,
@@ -470,5 +514,20 @@
   "brush_chooser.default.window_size": [
     256,
     306
-  ]
+  ],
+  "color_chooser.default.window_size": [
+    256,
+    264
+  ],
+  "brush_chooser.default.selected_group": "favorites",
+  "preview.show_viewfinder": true,
+  "linemode.entry_pressure": 1.0,
+  "linemode.exit_pressure": 1.0,
+  "color_chooser.fast_subset.window_size": [
+    282,
+    322
+  ],
+  "color_chooser.fast_subset.selected_adjuster": "WashColorChangerTool",
+  "linemode.midpoint_pressure": 1.0,
+  "linemode.line_tail": 0.75
 }

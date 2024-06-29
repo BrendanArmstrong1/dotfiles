@@ -4,6 +4,7 @@
 !aliasrc
 !picom.conf
 !nvim/
+!clangd/
 !tmux/
 !X11/
 !bat/

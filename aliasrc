@@ -3,7 +3,7 @@
 alias la='eza -a --color=automatic --icons'
 #alias ll='ls -alh --color=auto'
 alias ll='eza -lah --color=automatic --icons'
-alias lt='eza --tree --level=3 --icons'
+alias lt='eza --tree --level=2 --long --icons --git'
 
 alias df='df -h'
 alias grep='grep --color --line-buffered'

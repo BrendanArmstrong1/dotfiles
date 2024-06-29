@@ -7,18 +7,20 @@
 export PATH=$PATH:$HOME/.config/scripts:$HOME/.config/scripts/blocks:$HOME/.config/scripts/utils:$HOME/.config/scripts/programs:$HOME/.config/scripts/system:$HOME/.config/emacs/bin:$HOME/.local/bin:$HOME/.local/share/gem/ruby/3.0.0/bin:$HOME/.local/share/cargo/bin
 export PATH="$PATH:$HOME/.local/bin"
 export EDITOR=nvim
+export VISUAL=nvim
 export TERMINAL=st
 export BROWSER=google-chrome-stable
 
-export FZF_DEFAULT_COMMAND='fd --type f --color=never --hidden'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+export FZF_ALT_C_COMMAND="$FZF_CTRL_T_COMMAND"
+export FZF_CTRL_T_COMMAND='fd -t d --hidden -follow --exclude ".git" . $HOME'
 export FZF_CTRL_T_OPTS="--reverse --height=30 --color=bg+:#343d46,gutter:-1,pointer:#ff3c3c,info:#0dbc79,hl:#0dbc79,hl+:#23d18b --preview='bat --color=always --style=numbers {}'"
-export FZF_ALT_C_COMMAND='fd --type d . --color=never --hidden'
-export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -50'"
+# export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -50'"
 
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export MANROFFOPT="-c"
 
+export READER="zathura"
 export GOPATH="$HOME/S/Go"
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export LESSKEY="$XDG_CONFIG_HOME/less/lesskey"
