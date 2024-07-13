@@ -29,6 +29,7 @@ alias camrec='mpv --demuxer-lavf-format=video4linux2 --demuxer-lavf-o-set=input_
 alias cp='cp -iv'
 alias fl='source findDirectory'
 
+alias trdl='transmission-remote -a '
 
 alias proj='cd ~/S/projects'
 
