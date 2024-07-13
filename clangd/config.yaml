@@ -1,5 +1,5 @@
 CompileFlags:
-  Add: [-Wall, -Wextra, -pedantic, -std=c89, -D_POSIX_C_SOURCE=200809L]
+  Add: [-Wall, -Wextra, -pedantic, -std=c89, -Wno-char-subscripts, -D_POSIX_C_SOURCE=200809L]
   Remove: [-Wempty-translation-unit]
 
 ---
