@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+currentdir="$(pwd)"
+
+scrot "$currentdir"'/%F_%T_$wx$h.png' --line mode=edge --select
