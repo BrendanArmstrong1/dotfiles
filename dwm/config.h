@@ -115,6 +115,7 @@ static Key keys[] = {
 	{ Mod1Mask|MODKEY,         XK_6,      spawn,          SHCMD("screenshot.sh --hide") },
 	{ Mod1Mask|MODKEY,         XK_7,      spawn,          SHCMD("screenshot.sh --full") },
 	{ Mod1Mask|MODKEY,         XK_8,      spawn,          SHCMD("screenshot.sh --wiki") },
+	{ Mod1Mask|MODKEY,         XK_g,      spawn,          SHCMD("screenshot.sh --pictures") },
 	{ Mod1Mask|MODKEY,         XK_c,      spawn,          SHCMD("screen_to_clipboard.sh") },
 	{ Mod1Mask|MODKEY,         XK_b,      spawn,          SHCMD("google-chrome-stable") },
 	/* { Mod1Mask|MODKEY,         XK_w,      spawn,          SHCMD("qutebrowser") }, */
@@ -123,7 +124,7 @@ static Key keys[] = {
 	{ Mod1Mask|MODKEY,         XK_p,      spawn,          SHCMD("pavucontrol") },
 	{ Mod1Mask|MODKEY,         XK_f,      spawn,          SHCMD("thunar") },
 	{ Mod1Mask|MODKEY,         XK_i,      spawn,          SHCMD("Audio_Swap.sh") },
-	{ MODKEY,                       XK_Insert, spawn,          SHCMD("xdotool type $(grep -v '^#' ~/S/Documents/snippets | dmenu -i -l 50 | cut -d' ' -f1)") },
+	{ MODKEY,                       XK_Insert, spawn,          SHCMD("xdotool type $(grep -v '^#' ~/ssd/Documents/snippets | dmenu -i -l 50 | cut -d' ' -f1)") },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_m,      spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },

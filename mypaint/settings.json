@@ -39,7 +39,7 @@
   "ui.dark_theme_variant": true,
   "ui.rendered_tile_cache_size": 16384,
   "saving.default_format": "openraster",
-  "brushmanager.selected_brush": "deevad/Smooth-dip-pen_copy",
+  "brushmanager.selected_brush": "deevad/soft-dip-pen",
   "brushmanager.selected_groups": [],
   "frame.color_rgba": [
     0.12,
@@ -94,7 +94,7 @@
         }
       ],
       "w": 320,
-      "h": 1310
+      "h": 1315
     },
     "right_sidebar": {
       "groups": [
@@ -138,14 +138,14 @@
         }
       ],
       "w": 331,
-      "h": 1310
+      "h": 1315
     },
     "floating": [],
     "position": {
-      "x": 2560,
-      "y": 21,
-      "w": 3434,
-      "h": 1413
+      "x": 0,
+      "y": 16,
+      "w": 2554,
+      "h": 1418
     },
     "autohide": true,
     "fullscreen": false,
@@ -183,7 +183,9 @@
     "Raspberry Pi Pico Keyboard:mouse:4": {},
     "Raspberry Pi Pico Mouse:mouse:4": {},
     "Brendan Split Keyboard:mouse:4": {},
-    "ZMK Project Brendan Split Keyboard:mouse:4": {}
+    "ZMK Project Brendan Split Keyboard:mouse:4": {},
+    "SINO WEALTH Gaming KB  Mouse:mouse:4": {},
+    "SINO WEALTH Gaming KB  Consumer Control:mouse:4": {}
   },
   "colors.current": "#0e41b9",
   "colors.palette": {
@@ -501,10 +503,10 @@
     ]
   },
   "colors.history": [
-    "#ff0000",
-    "#124aff",
     "#afb045",
     "#0a62a8",
+    "#0e40b9",
+    "#0e40b9",
     "#0e40b9"
   ],
   "ui.support_smooth_scrolling": true,

@@ -1,7 +1,7 @@
 #!/bin/sh
 
 
-folder="$(ls ~/H/MediaStorage/Video | dmenu -l 20 -p 'Which Folder?')"
-file="$(ls ~/H/MediaStorage/Video/$folder | dmenu -l 20 -p 'Which file to play?' | sed 's/\([^a-zA-Z0-9._-]\)/\\\1/g')"
-echo "~/H/MediaStorage/Video/$folder/$file"
+folder="$(ls ~/storage/MediaStorage/Video | dmenu -l 20 -p 'Which Folder?')"
+file="$(ls ~/storage/MediaStorage/Video/$folder | dmenu -l 20 -p 'Which file to play?' | sed 's/\([^a-zA-Z0-9._-]\)/\\\1/g')"
+echo "~/storage/MediaStorage/Video/$folder/$file"
 

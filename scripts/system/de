@@ -1,7 +1,7 @@
 #!/bin/sh
 
 cwd="$(pwd)"
-file="$(fd -H -E 'undodir/' -E 'node_modules/' -E 'Cache/' -E '.cache/' -E '.local/' -E 'H/' -E '.rustup/' -E '*.pyc' -E '.git/' \
+file="$(fd -H -E 'undodir/' -E 'node_modules/' -E 'Cache/' -E '.cache/' -E '.local/' -E 'storage/' -E '.rustup/' -E '*.pyc' -E '.git/' \
     -tf --no-ignore -c always --search-path "$cwd" | \
     fzf --reverse --height=30 --ansi --preview='bat --color=always --style=numbers {}')"
 

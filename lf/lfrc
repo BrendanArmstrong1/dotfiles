@@ -203,10 +203,10 @@ map Y $printf "%s" "$fx" | xclip -selection clipboard
 map gm newfold
 map gh cd ~
 map gc cd ~/.config
-map gp cd ~/S
-map gb cd ~/H/MediaStorage/backgrounds
+map gp cd ~/ssd
+map gb cd ~/storage/MediaStorage/backgrounds
 map gd cd ~/Downloads
-map gl cd ~/S/projects/
+map gl cd ~/ssd/projects/
 map gs set hidden!
 map gS cd ~/Documents/Screenshots/
 

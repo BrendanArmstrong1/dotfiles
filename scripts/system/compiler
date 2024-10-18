@@ -46,9 +46,9 @@ Go_processor() {
 }
 
 Latex_processor() {
-	[ -d "$dir"/FileStorage ] || mkdir "$dir/FileStorage"
+	[ -d "$dir"FileStorage ] || mkdir "${dir}FileStorage"
 	pdflatex -halt-on-error -output-directory "$dir""FileStorage" "$fullpath" || notify-send "Compilation Error"
-	mv "$dir/FileStorage/${fileroot##*/}.pdf" "$dir"
+	mv "${dir}FileStorage/${fileroot##*/}.pdf" "$dir"
 	pidof zathura || zathura "$fileroot.pdf" &
 }
 

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-resumeFolder="$HOME/S/Documents/Employment/Variants"
+resumeFolder="$HOME/ssd/Documents/Employment/Variants"
 file="$(ls $resumeFolder | dmenu -l 5)"
 pat="$(fd ".*\.tex" "$resumeFolder/$file")"
 

@@ -1,25 +1,27 @@
 /* See LICENSE file for copyright and license details. */
+// clang-format off
 
 #define SESSION_FILE "/tmp/dwm-session"
 
 /* appearance */
-static unsigned int borderpx  = 1;        /* border pixel of windows */
-static unsigned int snap      = 32;       /* snap pixel */
+static unsigned int borderpx  = 3;        /* border pixel of windows */
+static unsigned int snap      = 0;       /* snap pixel */
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
 static const int focusonwheel       = 0;
 static char font[]            = "FuraCode Nerd Font Mono:size=10";
 static char dmenufont[]       = "FuraCode Nerd Font Mono:size=10";
-static const char *fonts[]          = { "monospace:size=10",
-										"Noto Color Emoji:size:16",
-										"FuraCode Nerd Font Mono:size=10",
-										"Source Han Sans:size=10",
-										};
+static const char *fonts[] = {
+          "monospace:size=10",
+					"Noto Color Emoji:size:16",
+					"FuraCode Nerd Font Mono:size=10",
+					"Source Han Sans:size=10",
+					};
 static char normbgcolor[]           = "#222222";
-static char normbordercolor[]       = "#444444";
+static char normbordercolor[]       = "#000000";
 static char normfgcolor[]           = "#bbbbbb";
 static char selfgcolor[]            = "#eeeeee";
-static char selbordercolor[]        = "#005577";
+static char selbordercolor[]        = "#2283f2";
 static char selbgcolor[]            = "#005577";
 
 enum { SchemeNorm, SchemeCol1, SchemeCol2, SchemeCol3, SchemeCol4,
@@ -27,7 +29,7 @@ enum { SchemeNorm, SchemeCol1, SchemeCol2, SchemeCol3, SchemeCol4,
 
 static char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
+	[SchemeNorm]  = { normfgcolor,      normbgcolor, normbordercolor },
 	[SchemeCol1]  = { normfgcolor,      normbgcolor, normbordercolor },
 	[SchemeCol2]  = { normfgcolor,      normbgcolor, normbordercolor },
 	[SchemeCol3]  = { normfgcolor,      normbgcolor, normbordercolor },
@@ -45,9 +47,12 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance    title       tags mask     isfloating   monitor    float x,y,w,h         floatborderpx*/
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1,        50,50,500,500,        5 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1,        50,50,500,500,        5 },
+	 /* class      instance    title       tags mask     isfloating   monitor    float x,y,w,h         floatborderpx*/
+	{ "nannou",   NULL,       NULL,       0,            1,           -1,        -1,-1,-1,-1,           -1 },
+	{ "gnuplot-qt", NULL,     NULL,       0,            1,           -1,        -1,-1,-1,-1,           -1 },
+	{ "Gimp",     NULL,       NULL,       0,            1,           -1,        50,50,1000,1000,        5 },
+	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1,        50,50,500,500,          5 },
+	{ "St",       NULL, "floating",       0,            1,           -1,        -1,-1,-1,-1,            5 },
 };
 
 /* layout(s) */
@@ -96,9 +101,8 @@ ResourcePref resources[] = {
 		{ "topbar",           	INTEGER, &topbar },
 		{ "nmaster",          	INTEGER, &nmaster },
 		{ "resizehints",       	INTEGER, &resizehints },
-		{ "mfact",      	    	FLOAT,   &mfact },
+		{ "mfact",      	      FLOAT,   &mfact },
 };
-
 
 #include "movestack.c"
 static Key keys[] = {
@@ -106,13 +110,23 @@ static Key keys[] = {
 	{ Mod1Mask|MODKEY,         XK_1,      spawn,          SHCMD("changebg") },
 	{ Mod1Mask|MODKEY,         XK_2,      spawn,          SHCMD("bgswap.sh") },
 	{ Mod1Mask|MODKEY,         XK_3,      spawn,          SHCMD("dmenuEmoji.sh") },
-	{ Mod1Mask|MODKEY,         XK_b,      spawn,          SHCMD("brave") },
-	{ Mod1Mask|MODKEY,         XK_w,      spawn,          SHCMD("qutebrowser") },
+	{ Mod1Mask|MODKEY,         XK_4,      spawn,          SHCMD("screenshot.sh --select") },
+	{ Mod1Mask|MODKEY,         XK_5,      spawn,          SHCMD("screenshot.sh --blur") },
+	{ Mod1Mask|MODKEY,         XK_6,      spawn,          SHCMD("screenshot.sh --hide") },
+	{ Mod1Mask|MODKEY,         XK_7,      spawn,          SHCMD("screenshot.sh --full") },
+	{ Mod1Mask|MODKEY,         XK_8,      spawn,          SHCMD("screenshot.sh --wiki") },
+	{ Mod1Mask|MODKEY,         XK_g,      spawn,          SHCMD("screenshot.sh --pictures") },
+	{ Mod1Mask|MODKEY,         XK_c,      spawn,          SHCMD("screen_to_clipboard.sh") },
+	{ Mod1Mask|MODKEY,         XK_b,      spawn,          SHCMD("google-chrome-stable") },
+	/* { Mod1Mask|MODKEY,         XK_w,      spawn,          SHCMD("qutebrowser") }, */
+	{ Mod1Mask|MODKEY,         XK_s,      spawn,          SHCMD("steam") },
 	{ Mod1Mask|MODKEY,         XK_d,      spawn,          SHCMD("discord") },
 	{ Mod1Mask|MODKEY,         XK_p,      spawn,          SHCMD("pavucontrol") },
-	{ Mod1Mask|MODKEY,         XK_e,      spawn,          SHCMD("emacsclient -c") },
+	{ Mod1Mask|MODKEY,         XK_f,      spawn,          SHCMD("thunar") },
+	{ Mod1Mask|MODKEY,         XK_i,      spawn,          SHCMD("Audio_Swap.sh") },
+	{ MODKEY,                       XK_Insert, spawn,          SHCMD("xdotool type $(grep -v '^#' ~/ssd/Documents/snippets | dmenu -i -l 50 | cut -d' ' -f1)") },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY,                       XK_m,      spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_minus,  focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_equal,  focusstack,     {.i = -1 } },
@@ -122,20 +136,34 @@ static Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+	{ MODKEY,                       XK_h,	   focusmon,       {.i = +1 } },
+	{ MODKEY,                       XK_l,      focusmon,       {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_h,	   tagmon,         {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_l,	   tagmon,         {.i = -1 } },
+	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
+	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_j,      movestack,      {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } },
+	{ MODKEY,                       XK_n,      viewnext,       {0} },
+	{ MODKEY,                       XK_t,      viewprev,       {0} },
+	{ MODKEY|ShiftMask,             XK_n,	   tagtonext,      {0} },
+	{ MODKEY|ShiftMask,             XK_t,	   tagtoprev,      {0} },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
 	{ MODKEY,                       XK_o,      incnmaster,     {.i = -1 } },
-	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
-	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
+	{ MODKEY,                       XK_u,      setmfact,       {.f = -0.05} },
+	{ MODKEY,                       XK_y,      setmfact,       {.f = +0.05} },
 	{ MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
-	{ MODKEY,                       XK_Tab,    view,           {0} },
-	{ MODKEY,                       XK_v,      killclient,     {0} },
-	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
+	{ MODKEY,                       XK_Tab,    togglecanfocusfloating,  {0} },
+	{ MODKEY,                       XK_q,      killclient,     {0} },
+	{ MODKEY|ControlMask,           XK_m,      killclient,     {0} },
+	{ MODKEY,                       XK_d,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
-	{ MODKEY,                       XK_space,  setlayout,      {0} },
+	{ MODKEY,                       XK_s,      setlayout,      {.v = &layouts[2]} },
+	/* { MODKEY,                       XK_space,  setlayout,      {+1} }, Causes segfault!!*/
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
-	{ MODKEY,                       XK_Down,   moveresize,     {.v = "0x 25y 0w 0h" } },
+	{ MODKEY|Mod1Mask,              XK_space,  togglealwaysontop, {0} },
 	{ MODKEY,                       XK_Up,     moveresize,     {.v = "0x -25y 0w 0h" } },
+	{ MODKEY,                       XK_Down,   moveresize,     {.v = "0x 25y 0w 0h" } },
 	{ MODKEY,                       XK_Right,  moveresize,     {.v = "25x 0y 0w 0h" } },
 	{ MODKEY,                       XK_Left,   moveresize,     {.v = "-25x 0y 0w 0h" } },
 	{ MODKEY|ShiftMask,             XK_Down,   moveresize,     {.v = "0x 0y 0w 25h" } },
@@ -161,8 +189,8 @@ static Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-	{ MODKEY|ShiftMask,             XK_r,      quit,           {1} },
-	{ MODKEY|ControlMask|ShiftMask, XK_v,      quit,           {0} }, 
+	{ MODKEY|Mod1Mask|ControlMask|ShiftMask, XK_r,      quit,           {1} },
+	{ MODKEY|Mod1Mask|ControlMask|ShiftMask, XK_q,      quit,           {0} },
 };
 
 /* button definitions */
@@ -175,9 +203,9 @@ static Button buttons[] = {
 	{ ClkStatusText,        0,              Button1,        sigdwmblocks,   {.i = 1} },
 	{ ClkStatusText,        0,              Button2,        sigdwmblocks,   {.i = 2} },
 	{ ClkStatusText,        0,              Button3,        sigdwmblocks,   {.i = 3} },
-	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
-	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
-	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
+	{ ClkClientWin,         ShiftMask,      Button1,        movemouse,      {0} },
+	{ ClkClientWin,         ShiftMask,      Button2,        togglefloating, {0} },
+	{ ClkClientWin,         ShiftMask,      Button3,        resizemouse,    {0} },
 	{ ClkTagBar,            0,              Button1,        view,           {0} },
 	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
@@ -274,3 +302,4 @@ static Signal signals[] = {
 	{ "setlayout",      setlayout },
 	{ "setlayoutex",    setlayoutex },
 };
+// clang-format on

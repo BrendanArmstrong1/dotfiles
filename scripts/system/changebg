@@ -1,6 +1,6 @@
 #!/bin/sh
 
-bg="$(find ~/H/MediaStorage/backgrounds -type f | nsxiv -ito | xargs echo)"
+bg="$(find ~/storage/MediaStorage/backgrounds -type f | nsxiv -ito | xargs echo)"
 mon0="${bg%% *}"
 # second="${bg#* }"
 # mon1="${second%% *}"

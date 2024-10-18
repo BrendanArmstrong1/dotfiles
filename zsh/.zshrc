@@ -111,7 +111,7 @@ bindkey -s '^a' 'bc -lq\n'
 
 bindkey -s '^F' 'de\n'
 
-# Edit line in vim with ctrl-e:
+# Edit line in vim with ctrl-n:
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^n' edit-command-line
 

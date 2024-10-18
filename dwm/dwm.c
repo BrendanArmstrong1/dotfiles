@@ -970,7 +970,7 @@ expose(XEvent *e)
 	XExposeEvent *ev = &e->xexpose;
 
 	if (ev->count == 0 && (m = wintomon(ev->window)))
-		drawbar(m);
+		drawbars();
 }
 
 void
@@ -1677,7 +1677,7 @@ propertynotify(XEvent *e)
 		if (ev->atom == XA_WM_NAME || ev->atom == netatom[NetWMName]) {
 			updatetitle(c);
 			if (c == c->mon->sel)
-				drawbar(c->mon);
+				drawbars();
 		}
 		if (ev->atom == netatom[NetWMWindowType])
 			updatewindowtype(c);
@@ -2809,11 +2809,11 @@ updatestatus(void)
                                 *(sts++) = *rst;
                 *stp = *stc = *sts = '\0';
                 wstext = TTEXTW(stextp) + LSPAD + RSPAD;
-        } else {
-                strcpy(stextc, "dwm-"VERSION);
-                strcpy(stexts, stextc);
-                wstext = TTEXTW(stextc) + LSPAD + RSPAD;
-        }
+  } else {
+          strcpy(stextc, "dwm-"VERSION);
+          strcpy(stexts, stextc);
+          wstext = TTEXTW(stextc) + LSPAD + RSPAD;
+  }
 	for(m = mons; m; m = m->next)
 		drawbar(m);
 }

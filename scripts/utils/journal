@@ -1,7 +1,7 @@
 #!/bin/sh
 
 ddate=$(date +%B_%d)
-dir="$HOME/S/Documents/Journals/$ddate"
+dir="$HOME/ssd/Documents/Journals/$ddate"
 file="$(date +%B_%d_%a_%Y).tex"
 
 [ -d $dir ] || mkdir $dir 
