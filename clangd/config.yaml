@@ -3,7 +3,7 @@ CompileFlags:
     - -Wall
     - -Wextra
     - -pedantic
-    - -std=c89
+    - -std=c99
     - -Wno-char-subscripts
     - -Wno-deprecated-declarations
     - -D_DEFAULT_SOURCE
