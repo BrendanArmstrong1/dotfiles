@@ -5,6 +5,5 @@ dwmblocks &
 dunst & 
 transmission-daemon &
 picom -b &
-protonstuff &
 xrdb -merge ~/.config/X11/xresources
 exec dwm
