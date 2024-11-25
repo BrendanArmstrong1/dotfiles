@@ -1,18 +1,35 @@
-! Transparency (0-1)
-*.alpha: 0.8
-*.alphaOffset: 0.0
+st.font: ComicCode Nerd Font:style=Regular:size=18
+st.fontalt0: Noto Color Emoji:style=Regular:size=18
 
-!! Set a default font and font size as below:
-!! *.font: FiraCode Nerd Font Mono:size=16
-
-st.font: ComicCode Nerd Font:size=18
+! Terminal preferences
 st.termname: st-256color
+st.shell: /bin/zsh
+st.minlatency: 8
+st.maxlatency: 33
+st.blinktimeout: 800
+st.bellvolume: 0
+st.tabspaces: 8
 st.borderpx: 2
+st.cwscale: 1.0
+st.chscale: 1.0
+st.alpha: 0.8
+st.alphaOffset: 0.0
+
+! X font rendering
+Xft.antialias: 1
+Xft.hinting: 1
+Xft.autohint: 0
+Xft.hintstyle: hintslight
+Xft.rgba: rgb
+Xft.lcdfilter: lcddefault
+Xft.dpi: 96
+
+!COLOR
 
 !! Set the background, foreground and cursor colors as below:
-*.background: #000000
-*.foreground: white
-*.cursorcolor: white
+st.background: #000000
+st.foreground: white
+st.cursorcolor: white
 
 ! Black + DarkGrey
 *color0:  #000000
@@ -38,27 +55,3 @@ st.borderpx: 2
 ! LightGrey + White
 *color7:  #bbbbbb
 *color15: #ffffff
-
-/* !! gruvbox: */
-/* *.color0: #1d2021 */
-/* *.color8: #928374 */
-/* *.color1: #cc241d */
-/* *.color9: #fb4934 */
-/* *.color2: #98971a */
-/* *.color10: #b8bb26 */
-/* *.color3: #d79921 */
-/* *.color11: #fabd2f */
-/* *.color4: #458588 */
-/* *.color12: #83a598 */
-/* *.color5: #b16286 */
-/* *.color13: #d3869b */
-/* *.color6: #689d6a */
-/* *.color14: #8ec07c */
-/* *.color7: #a89984 */
-/* *.color15: #ebdbb2 */
-/* *.background: #000000 */
-/* *.foreground: white */
-/* *.cursorcolor: white */
-
-
-

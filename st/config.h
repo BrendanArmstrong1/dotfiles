@@ -7,11 +7,15 @@ char *externalpipe_sigusr1[] = {"/bin/sh", "-c",
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 static char *font =
-    "FuraCode Nerd Font Mono:pixelsize=18:antialias=true:autohint=true";
+    "ComicCode Nerd Font:pixelsize=18:antialias=true:autohint=true";
 static char *font2[] = {
-    "FuraCode Nerd Font Mono:pixelsize=18:antialias=true:autohint=true",
-    "Source Han Sans:pixelsize=11:antialias=true:autohint=true",
-    "Noto Color Emoji:pixelsize=15:antialias=true:autohint=true"};
+    "ComicCode Nerd Font:pixelsize=18:antialias=true:autohint=true",
+    "Noto Sans CJK JP:pixelsize=18:antialias=true:autohint=true",
+    "Noto Color Emoji:pixelsize=18:antialias=true:autohint=true",
+    "Symbola:pixelsize=18:antialias=true:autohint=true",
+    "Noto Sans Symbols:pixelsize=18:antialias=true:autohint=true",
+    "Noto Sans Symbols2:pixelsize=18:antialias=true:autohint=true",
+    "Source Han Sans:pixelsize=18:antialias=true:autohint=true"};
 static int borderpx = 2;
 
 /*
