@@ -1,4 +1,0 @@
-#!/usr/bin/sh
-
-echo "$1"
-cat ~/ssd/Cook2023 | xargs -I{} curl -s -H {} "https://adventofcode.com/2023/day/"$1"/input" >> ~/ssd/AoC/2023/dec-"$1"/input.txt

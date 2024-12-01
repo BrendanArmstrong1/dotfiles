@@ -124,6 +124,39 @@ source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
 source /usr/share/zsh/plugins/zsh-system-clipboard/zsh-system-clipboard.zsh 2>/dev/null
-# eval "$(starship init zsh)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export FZF_COMPLETION_TRIGGER=''
+bindkey '^T' fzf-completion
+bindkey '^I' $fzf_default_completion
+
+# Configuring fuzzy completion
+# https://github.com/junegunn/fzf#settings
+_fzf_compgen_path () {
+  [[ ! -d "$1"/.git ]] && fd_flags="-I"
+  fd --hidden --type f --follow --exclude ".git" "$fd_flags" . "$1"
+}
+
+_fzf_compgen_dir () {
+  [[ ! -d "$1"/.git ]] && fd_flags="-I"
+  fd --hidden --type d --follow --exclude ".git" "$fd_flags" . "$1"
+}
+
+# # Options for path completion (e.g. vim **<TAB>)
+# export FZF_COMPLETION_PATH_OPTS='--walker file,dir,follow,hidden'
+#
+# # Options for directory completion (e.g. cd **<TAB>)
+# export FZF_COMPLETION_DIR_OPTS='--walker dir,follow'
+
+# fzf options for each command
+_fzf_comprun () {
+  local command=$1
+  shift
+  case "$command" in
+    cd)           fzf --preview 'tree -C {} | head -200'   "$@" ;;
+    export|unset) fzf --preview "eval 'echo \$'{}"         "$@" ;;
+    ssh)          fzf --preview 'dig {}'                   "$@" ;;
+    *)            fzf --preview 'bat -n --color=always {}' "$@" ;;
+  esac
+}

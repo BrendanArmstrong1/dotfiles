@@ -1,0 +1,17 @@
+H/*
+.env
+.env/
+/venv*
+.coverage
+.tox
+~/.local
+~/.cache
+**/z:
+dist
+*.pyc
+*.egg-info
+S/
+~/Documents/
+!~/.vim/
+!~/.config/
+tags
