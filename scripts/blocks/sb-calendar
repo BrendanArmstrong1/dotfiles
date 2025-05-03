@@ -10,7 +10,3 @@ case $1 in
 esac
 
 [ -n "$1" ] || echo "$(date '+%a %b %d,%l:%M %P')"
-
-
-
-
