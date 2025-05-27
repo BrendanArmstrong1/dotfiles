@@ -1,0 +1,38 @@
+# Aliases for terminal
+
+alias la='eza -a --color=automatic --icons'
+#alias ll='ls -alh --color=auto'
+alias ll='eza -lah --color=automatic --icons'
+alias lt='eza --tree --level=2 --long --icons --git'
+
+alias df='df -h'
+alias grep='grep --color --line-buffered'
+
+alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"'
+
+alias vom='vim'
+alias vin='vim'
+alias von='vim'
+
+alias lf="lfub"
+alias gl="~/.config/tmux/scripts/tmux_sessionizer.sh"
+
+alias xrdb='xrdb -load ~/.config/X11/xresources'
+alias vi='nvim'
+
+alias im='nsxiv'
+
+alias sc-im='sc-im --autocalc'
+
+alias cam='mpv --demuxer-lavf-format=video4linux2 --demuxer-lavf-o-set=input_format=mjpeg av://v4l2:/dev/video0 --profile=low-latency --untimed'
+alias camrec='mpv --demuxer-lavf-format=video4linux2 --demuxer-lavf-o-set=input_format=mjpeg av://v4l2:/dev/video0 --stream-record=/home/brendan/Documents/Videos/record.mp4'
+
+alias cp='cp -iv'
+alias fl='source findDirectory'
+
+alias trdl='transmission-remote -a '
+
+alias proj='cd ~/ssd/projects'
+
+alias prp='pipenv run python'
+alias cf='xclip -out - -selection clipboard >'

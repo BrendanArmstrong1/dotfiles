@@ -1,0 +1,57 @@
+st.font: ComicCode Nerd Font:style=Regular:size=18
+st.fontalt0: Noto Color Emoji:style=Regular:size=18
+
+! Terminal preferences
+st.termname: st-256color
+st.shell: /bin/zsh
+st.minlatency: 8
+st.maxlatency: 33
+st.blinktimeout: 800
+st.bellvolume: 0
+st.tabspaces: 8
+st.borderpx: 2
+st.cwscale: 1.0
+st.chscale: 1.0
+st.alpha: 0.8
+st.alphaOffset: 0.0
+
+! X font rendering
+Xft.antialias: 1
+Xft.hinting: 1
+Xft.autohint: 0
+Xft.hintstyle: hintslight
+Xft.rgba: rgb
+Xft.lcdfilter: lcddefault
+Xft.dpi: 96
+
+!COLOR
+
+!! Set the background, foreground and cursor colors as below:
+st.background: #000000
+st.foreground: white
+st.cursorcolor: white
+
+! Black + DarkGrey
+*color0:  #000000
+*color8:  #555753
+! DarkRed + Red
+*color1:  #cd0000
+*color9:  #ff0000
+! DarkGreen + Green
+*color2:  #00cd00
+*color10: #00ff00
+! DarkYellow + Yellow
+*color3:  #cdcd00
+*color11: #ffff00
+! DarkBlue + Blue
+*color4:  #0000cd
+*color12: #2292ff
+! DarkMagenta + Magenta
+*color5:  #cd00cd
+*color13: #ff00ff
+!DarkCyan + Cyan (both not tango)
+*color6:  #00cdcd
+*color14: #00ffff
+! LightGrey + White
+*color7:  #bbbbbb
+*color15: #ffffff

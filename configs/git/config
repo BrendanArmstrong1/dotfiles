@@ -1,0 +1,61 @@
+; [core]
+;   pager = delta
+; [interactive]
+;   diffFilter = delta --color-only
+;
+; [delta]
+;   navigate = true
+;
+; [merge]
+;   conflictstile = diff3
+; [credential]
+; 	helper = store
+
+# Defaults
+[user]
+	name = Brendan Armstrong
+	email = brendanarmstrong@protonmail.com
+[gpg]
+  format = ssh
+[commit]
+  gpgsign = false
+
+[github]
+	user = BrendanArmstrong1
+
+[alias]
+  st = status -s
+	hub = !hub
+  lol = log --oneline --graph --all
+  loglog = log --all --decorate --oneline --graph
+  lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all
+  lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
+  lg = lg1
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+
+# clearly makes git better
+[column]
+  ui = auto
+[branch]
+  sort = -committerdate
+[tag]
+  sort = version:refname
+[init]
+	defaultBranch = main
+[diff]
+  colorMoved = plain
+  algorithm = histogram
+  mnemonicPrefix = true
+  renames = true
+[push]
+  default = simple
+  autoSetupRemote = true
+  followTags = true
+[fetch]
+  prune = true
+  ; pruneTags = true
+  ; all = true

@@ -1,0 +1,29 @@
+CompileFlags:
+  Add:
+    - -Wall
+    - -Wextra
+    - -pedantic
+    - -std=c99
+    - -Wno-char-subscripts
+    - -Wno-deprecated-declarations
+    - -I/home/brendan/.local/lib/include
+    - -D_DEFAULT_SOURCE
+    - -D_BSD_SOURCE
+    - -D_POSIX_C_SOURCE=200809L
+  Remove: [-Wempty-translation-unit]
+
+---
+
+If:
+  PathMatch: .*\.h
+
+CompileFlags:
+  Add: [-xc-header]
+
+---
+
+If:
+  PathMatch: .*\.c
+
+CompileFlags:
+  Add: [-xc]
