@@ -128,7 +128,7 @@ function M:entry(job)
   	if ya.target_family() == "windows" and args[1] == "fzf" then
 		cmd_args = [[fzf --preview="bat --color=always {}"]]
 	elseif ya.target_family() == "windows" and args[1] == "rg" then
-		local rg_prefix = [[rg --colors "path:fg:blue" --colors "line:fg:red" --colors "column:fg:yellow" --column --line-number --no-heading --color=always --smart-case ]]
+		local rg_prefix = [[rg --colors "path:fg:blue" --colors "line:fg:red" --colors "column:fg:yellow" --column --follow --line-number --no-heading --color=always --smart-case ]]
 		cmd_args = [[fzf --ansi --disabled --bind "start:reload:]]
 			.. rg_prefix
 			.. [[{q}" --bind "change:reload:]]
@@ -142,7 +142,7 @@ function M:entry(job)
 		cmd_args = [[fzf --preview="bat --color=always {}"]]
 	elseif args[1] == "rg" and shell_value == "fish" then
 		cmd_args = [[
-			RG_PREFIX="rg --colors 'path:fg:blue' --colors 'line:fg:red' --colors 'column:fg:yellow' --column --line-number --no-heading --color=always --smart-case " \
+			RG_PREFIX="rg --colors 'path:fg:blue' --colors 'line:fg:red' --colors 'column:fg:yellow' --column --follow --line-number --no-heading --color=always --smart-case " \
 			fzf --ansi --disabled \
 				--bind "start:reload:$RG_PREFIX {q}" \
 				--bind "change:reload:sleep 0.1; $RG_PREFIX {q} || true" \
@@ -153,7 +153,7 @@ function M:entry(job)
 		]]
 	elseif args[1] == "rg" and (shell_value == "bash" or shell_value == "zsh")  then
 		cmd_args = [[
-			RG_PREFIX="rg --colors 'path:fg:blue' --colors 'line:fg:red' --colors 'column:fg:yellow' --column --line-number --no-heading --color=always --smart-case "
+			RG_PREFIX="rg --colors 'path:fg:blue' --colors 'line:fg:red' --colors 'column:fg:yellow' --column --follow --line-number --no-heading --color=always --smart-case "
 			fzf --ansi --disabled \
 				--bind "start:reload:$RG_PREFIX {q}" \
 				--bind "change:reload:sleep 0.1; $RG_PREFIX {q} || true" \
@@ -163,7 +163,7 @@ function M:entry(job)
 				--nth '3..'
 		]]
 	elseif args[1] == "rg" and shell_value == "nu" then
-		local rg_prefix = "rg --colors 'path:fg:blue' --colors 'line:fg:red' --colors 'column:fg:yellow' --column --line-number --no-heading --color=always --smart-case "
+		local rg_prefix = "rg --colors 'path:fg:blue' --colors 'line:fg:red' --colors 'column:fg:yellow' --column --follow --line-number --no-heading --color=always --smart-case "
 		cmd_args = [[fzf --ansi --disabled --bind "start:reload:]]
 			.. rg_prefix
 			.. [[{q}" --bind "change:reload:sleep 100ms; try { ]]
