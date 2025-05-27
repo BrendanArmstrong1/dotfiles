@@ -1,0 +1,22 @@
+#!/bin/sh
+
+file="$(fd -H -E 'undodir/' -E 'node_modules/' -E 'Cache/' -E '.cache/' -E '.local/' -E 'storage/' -E '.rustup/' -E '*.pyc' -E '.git/' \
+    -tf --no-ignore -c always --search-path "$HOME/" | \
+    fzf --reverse --height=20 --ansi)"
+
+ext="${file##*.}"
+dir="${file%/*}"
+
+[ "$file" = "" ] && exit 1
+
+case "$ext" in
+    png|jpg|jpeg)
+        nsxiv "$file"
+        ;;
+    pdf)
+        zathura "$file"
+        ;;
+    *)
+        nvim -c "cd! $dir" "$file"
+        ;;
+esac

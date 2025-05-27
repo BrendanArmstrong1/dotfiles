@@ -1,0 +1,28 @@
+#!/bin/sh
+
+logfile="/dev/shm/netlog"
+rxcurrent="$(($(paste -d '+' /sys/class/net/[ew]*/statistics/rx_bytes)))"
+txcurrent="$(($(paste -d '+' /sys/class/net/[ew]*/statistics/tx_bytes)))"
+if ! [ -f "$logfile" ]; then
+	echo "$rxcurrent $txcurrent" >"$logfile"
+	printf "resetting data...\\n"
+	exit
+fi
+
+prevdata="$(cat "$logfile")"
+
+down="$(((rxcurrent - ${prevdata%% *}) / 1024))"
+up="$(((txcurrent - ${prevdata##* }) / 1024))"
+
+downsuff="KB"
+upsuff="KB"
+
+downnew="$((down / 1024))"
+upnew="$((up / 1024))"
+
+[ "$downnew" -gt 0 ] && downsuff="MiB" && down=$downnew
+[ "$upnew" -gt 0 ] && upsuff="MiB" && up=$upnew
+
+echo "🔻$down $downsuff 🔺$up $upsuff"
+
+echo "$rxcurrent $txcurrent" >"$logfile"

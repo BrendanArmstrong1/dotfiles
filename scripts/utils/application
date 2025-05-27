@@ -1,0 +1,35 @@
+#!/bin/sh
+
+name="${1:-Company_name2}"
+location="${2:-location2}"
+position="${3:-position2}"
+date="$(date "+%b-%d-%Y")"
+name2="$(echo "$name" | sed 's/ /-/g')"
+position2="$(echo "$position" | sed -e 's/ /-/g' -e 's/\//\\\//g')"
+location2="$(echo "$location" | sed 's/ /-/g')"
+#~/ssd/Documents/Employment/Cover_letters/${name2}_v$index
+resfile="Brendan-Armstrong_Resume_${position2}_${date}"
+coverfile="Brendan-Armstrong_Coverletter_${position2}_${date}"
+comfile="Brendan-Armstrong_Combined-Coverletter-Resume_${position2}_${date}"
+cvrTemp="/home/brendan/ssd/Documents/Employment/Cover_letters/CoverLetter.tex"
+resTemp="/home/brendan/ssd/Documents/Employment/Brendan_resume.tex"
+
+index=1
+directory="/home/brendan/ssd/Documents/Employment/Cover_letters/${name2}_v$index"
+while [ -d "$directory" ]
+do
+    index=$(( index+1 ))
+    directory="/home/brendan/ssd/Documents/Employment/Cover_letters/${name2}_v$index"
+done
+
+mkdir "$directory"
+
+sed '' "$resTemp" >> "$directory/${resfile}.tex"
+sed -e "s/company/${name}/g" \
+    -e "s/location/${location}/g" \
+    "$cvrTemp" >> "$directory/${coverfile}.tex"
+sed -e "s/Coverletter/${coverfile}.pdf/g" -e "s/Resume/${resfile}.pdf/g" \
+    ~/.config/scripts/utils/combined_resume-coverletter.tex \
+    >> "$directory/${comfile}.tex"
+
+vim -O "$directory/${coverfile}.tex" "$directory/${resfile}.tex" +"3,67fo"

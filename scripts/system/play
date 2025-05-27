@@ -1,0 +1,7 @@
+#!/bin/sh
+
+
+folder="$(ls ~/storage/MediaStorage/Video | dmenu -l 20 -p 'Which Folder?')"
+file="$(ls ~/storage/MediaStorage/Video/$folder | dmenu -l 20 -p 'Which file to play?' | sed 's/\([^a-zA-Z0-9._-]\)/\\\1/g')"
+echo "~/storage/MediaStorage/Video/$folder/$file"
+

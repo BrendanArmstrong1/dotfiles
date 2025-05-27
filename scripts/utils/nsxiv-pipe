@@ -1,0 +1,29 @@
+#!/bin/sh
+# this script is meant to pair with my screenshot.sh
+# in order to full screen and zoom on a selected area
+# immideatly after snapping the image
+
+tmpfile="${TMPDIR:-/tmp}/nsxiv_pipe_$$"
+trap 'rm -f -- $tmpfile' EXIT
+
+if [ "$#" -eq 0 ]; then
+	if [ -t 0 ]; then
+		echo "nsxiv-pipe: No arguments provided" >&2
+		exit 1
+	else
+		# Consume stdin and put it in the temporal file
+		cat >"$tmpfile"
+	fi
+fi
+
+for arg in "$@"; do
+	# if it's a pipe then drain it to $tmpfile
+	[ -p "$arg" ] && cat "$arg" >"$tmpfile"
+done
+
+if [ -s "$tmpfile" ]; then
+	nsxiv -q -f -z 360 "$tmpfile" # -q to silence warnings
+	echo "here"
+else
+	nsxiv "$@" # fallback
+fi

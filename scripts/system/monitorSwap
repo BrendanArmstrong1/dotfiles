@@ -1,0 +1,6 @@
+#!/bin/sh
+
+numOfMonitors=$( xrandr --listmonitors | awk 'NR==1{print $2}')
+
+[ "$numOfMonitors" = "3" ] && xrandr --output HDMI-A-0 --off && xrandr --output DisplayPort-0 --set TearFree on --primary --output DisplayPort-2 --set TearFree on --left-of DisplayPort-0
+[ "$numOfMonitors" = "2" ] && xrandr --output HDMI-A-0 --auto && xrandr --output DisplayPort-0 --set TearFree on --primary --output DisplayPort-2 --set TearFree on --left-of DisplayPort-0 --output HDMI-A-0 --set TearFree on --right-of DisplayPort-0

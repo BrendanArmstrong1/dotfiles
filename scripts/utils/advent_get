@@ -1,0 +1,7 @@
+#!/usr/bin/sh
+
+echo "$1"
+year=2024
+mkdir --parents ~/ssd/AoC/$year/dec-$1
+cat ~/ssd/Cook$year | xargs -I{} curl -s -H {} "https://adventofcode.com/"$year"/day/"$1"/input" >> ~/ssd/AoC/"$year"/dec-"$1"/input.txt
+cp ~/ssd/AoC/$year/build.sh ~/ssd/AoC/$year/dec-$1/

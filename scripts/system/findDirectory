@@ -1,0 +1,10 @@
+#!/bin/sh
+
+
+dir="$(fd -H -E '.cache/' -E '.backups/' -E '.local/' -E '.rustup/' -E '.git/' \
+    -td -c always --no-ignore --search-path "$HOME/" | \
+    fzf --reverse --height=20 --ansi)"
+
+[ "$dir" = "" ] && return
+
+cd "$dir"

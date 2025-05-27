@@ -1,0 +1,57 @@
+#!/bin/python
+
+import sys
+import json
+
+num_arguments = len(sys.argv[1:])
+if num_arguments > 1:
+    print("Too many arguments")
+    sys.exit()
+elif num_arguments < 1:
+    argument = 100_000
+    print(f"Assuming gross salary of ${argument:,d}")
+else:
+    argument = float(sys.argv[1])
+    print(f"Gross Salary: ${argument:,.2f}")
+    print("")
+
+taxfile = "/home/brendan/.config/scripts/utils/taxinfo/currentTax.json"
+prov = []
+fed = []
+taxP = 0
+taxF = 0
+
+with open(taxfile) as f:
+    jsonObject = json.load(f)
+
+for item in jsonObject:
+    for entry in jsonObject[item]:
+        if item == "provincial":
+            prov.append((entry, jsonObject[item][entry]))
+        elif item == "federal":
+            fed.append((entry, jsonObject[item][entry]))
+
+temp = argument
+for entry in prov:
+    if temp < float(entry[0]):
+        continue
+    taxP += (temp - float(entry[0])) * entry[1] / 100
+    temp = float(entry[0])
+
+temp = argument
+for entry in fed:
+    if temp < float(entry[0]):
+        continue
+    taxF += (temp - float(entry[0])) * entry[1] / 100
+    temp = float(entry[0])
+
+taxT = taxP + taxF
+rateE = taxT / argument
+net = argument - taxT
+
+print(f"Provincial Tax: ${taxP:,.2f}")
+print(f"Federal Tax: ${taxF:,.2f}")
+print(f"Effective Rate: {rateE * 100:.2f}%")
+print(f"Net Pay: ${net:,.2f} ({taxT:,.2f} taxed)")
+print(f"Net Monthly: ${net / 12:,.2f}")
+print(f"Monthly Taxes: ${taxT / 12:,.2f}")

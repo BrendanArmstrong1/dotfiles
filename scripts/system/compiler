@@ -1,0 +1,109 @@
+#!/bin/sh
+
+fullpath="$1"
+extension="${fullpath##*.}"
+fileroot="${fullpath%.*}"
+dir="${fullpath%/*}/"
+
+C_processor() {
+	root="$(pwd)"
+	if [ -e "$root"/Makefile ]; then
+		make &&
+			"${root}/Output"
+	else
+		gcc -Wall -lm -o "${fileroot}" "$fullpath" &&
+			"${fileroot}"
+	fi
+}
+
+Rust_processor() {
+	cwd="$(pwd)"
+	while [ "$HOME" != "$cwd" ]; do
+		if [ -e "$cwd"/Cargo.toml ]; then
+			cd "$cwd" || return
+			cargo run
+			return
+		else
+			cwd="$(dirname "$cwd")"
+		fi
+	done
+	rustc "$fullpath" &&
+		"${fileroot}"
+}
+
+Go_processor() {
+	cwd="$(pwd)"
+	while [ "$HOME" != "$cwd" ]; do
+		if [ -e "$cwd"/go.mod ]; then
+			cd "$cwd" || return
+			go run .
+			return
+		else
+			cwd="$(dirname "$cwd")"
+		fi
+	done
+	go run "$fullpath"
+}
+
+Latex_processor() {
+	[ -d "$dir"FileStorage ] || mkdir "${dir}FileStorage"
+	pdflatex -halt-on-error -output-directory "$dir""FileStorage" "$fullpath" || notify-send "Compilation Error"
+	mv "${dir}FileStorage/${fileroot##*/}.pdf" "$dir"
+	pidof zathura || zathura "$fileroot.pdf" &
+}
+
+html_processor() {
+	window="$(xdotool search --onlyvisible --name " - qutebrowser")"
+	[ -z "$window" ] && qutebrowser "$fullpath" || autorefresh "$window"
+}
+
+JS_HTML() {
+	title="$(sed -n 's/.*<title>\(.\+\)<\/title>.*/\1/p' "$dir"/index.html)"
+	window="$(xdotool search --onlyvisible --name "$title - qutebrowser")"
+	if [ -z "$window" ]; then
+		setsid qutebrowser "${dir}/index.html" &
+	else
+		autorefresh "$window"
+	fi
+}
+
+javascript_processor() {
+	[ -f "${dir}/index.html" ] && JS_HTML || node "$fullpath"
+}
+
+autorefresh() {
+	initial_state="$(xdotool getactivewindow)"
+	monitor="$(dwm-msg get_dwm_client "$initial_state" | sed -n 's/.*monitor_number.*\([[:digit:]]\+\),/\1/p')"
+	target_mon="$(dwm-msg get_dwm_client "$1" | sed -n 's/.*monitor_number.*\([[:digit:]]\+\),/\1/p')"
+	if [ "$monitor" -eq "$target_mon" ]; then
+		while [ "$(xdotool getactivewindow)" -ne "$1" ]; do
+			dwmc focusstack -1
+			[ "$(xdotool getactivewindow)" = "$1" ] && xdotool key "r"
+		done
+		while [ "$(xdotool getactivewindow)" -ne "$initial_state" ]; do
+			dwmc focusstack -1
+		done
+	else
+		dwmc focusmon -1
+		[ "$(xdotool getactivewindow)" = "$1" ] && xdotool key "r"
+		while [ "$(xdotool getactivewindow)" -ne "$1" ]; do
+			dwmc focusstack -1
+			[ "$(xdotool getactivewindow)" = "$1" ] && xdotool key "r"
+		done
+		dwmc focusmon -1
+		while [ "$(xdotool getactivewindow)" -ne "$initial_state" ]; do
+			dwmc focusstack -1
+		done
+	fi
+}
+
+case "$extension" in
+"js") javascript_processor ;;
+"py") python "$fullpath" ;;
+"html" | "css") html_processor ;;
+"c") C_processor ;;
+"rs") Rust_processor ;;
+"go") Go_processor ;;
+"tex") Latex_processor ;;
+*) echo "Sorry .$extension is not in my handle list" ;;
+esac

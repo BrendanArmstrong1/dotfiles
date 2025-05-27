@@ -1,0 +1,9 @@
+#!/bin/sh
+
+bg="$(cat "$HOME/.config/wall.txt" | xargs echo)"
+mon0="${bg%% *}"
+# second="${bg#* }"
+# mon1="${second%% *}"
+
+feh --no-fehbg --bg-fill "$mon0"
+#--bg-scale "$mon1"

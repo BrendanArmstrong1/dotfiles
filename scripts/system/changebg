@@ -1,0 +1,11 @@
+#!/bin/sh
+
+bg="$(find ~/storage/MediaStorage/backgrounds -type f | nsxiv -ito | xargs echo)"
+mon0="${bg%% *}"
+# second="${bg#* }"
+# mon1="${second%% *}"
+
+echo "$mon0" >~/.config/wall.txt
+# echo "$mon1" >> ~/.config/wall.txt
+
+feh --no-fehbg --bg-fill "$mon0"

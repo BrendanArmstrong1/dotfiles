@@ -1,0 +1,16 @@
+#!/bin/sh
+
+send_gpu_info() {
+	gpu_temp="$(echo "$(cat /sys/class/drm/card1/device/hwmon/hwmon0/temp1_input) / 1000" | bc)"
+	gpu_util="$(cat /sys/class/drm/card1/device/gpu_busy_percent)"
+	gpu_vram="$(echo "scale=2; $(cat /sys/class/drm/card1/device/mem_info_vram_used) / 1000000000" | bc -l)"
+	echo "🔥GPU:+${gpu_temp}°C, Util:${gpu_util}%, Vram:${gpu_vram}Gb"
+}
+
+case $1 in
+1) notify-send "$(cat /sys/class/drm/card1/device/pp_dpm_sclk)" ;;
+2) setsid -f "$TERMINAL" -e "$EDITOR" ~/.config/scripts/blocks/sb-gpuT ;;
+3) setsid -f "$TERMINAL" -e radeontop -c ;;
+esac
+
+[ -n "$1" ] || send_gpu_info

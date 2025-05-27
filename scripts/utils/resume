@@ -1,0 +1,7 @@
+#!/bin/sh
+
+resumeFolder="$HOME/ssd/Documents/Employment/Variants"
+file="$(ls $resumeFolder | dmenu -l 5)"
+pat="$(fd ".*\.tex" "$resumeFolder/$file")"
+
+vim "$pat"
