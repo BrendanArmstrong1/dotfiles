@@ -30,3 +30,6 @@ for src in "$CONFIG_DIR/configs/"*;do
   ln -s "$src" "$dest"
   echo "Linked $src -> $dest"
 done
+
+sudo cp -r "$CONFIG_DIR/Fonts/" /usr/share/fonts/OTF/
+fc-cache -fv

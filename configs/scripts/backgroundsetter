@@ -1,0 +1,3 @@
+#!/bin/bash
+
+feh --no-fehbg --bg-fill /home/brendan/storage/MediaStorage/backgrounds/wallpapers/anime/wayland-longmon.png --bg-fill ~/storage/MediaStorage/backgrounds/wallpapers/anime/wayland_anime_girl_on_train.png
