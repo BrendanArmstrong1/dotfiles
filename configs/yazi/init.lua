@@ -13,12 +13,12 @@ Status:children_add(function()
 		return ""
 	end
 
-	return ui.Line {
+	return ui.Line({
 		ui.Span(ya.user_name(h.cha.uid) or tostring(h.cha.uid)):fg("magenta"),
 		":",
 		ui.Span(ya.group_name(h.cha.gid) or tostring(h.cha.gid)):fg("magenta"),
 		" ",
-	}
+	})
 end, 500, Status.RIGHT)
 
 Header:children_add(function()
@@ -28,17 +28,16 @@ Header:children_add(function()
 	return ui.Span(ya.user_name() .. "@" .. ya.host_name() .. ":"):fg("#87CEFA")
 end, 500, Header.LEFT)
 
-
 require("full-border"):setup({
 	type = ui.Border.ROUNDED,
 })
 
 require("fg"):setup({
-  default_action = "nvim"
+	default_action = "nvim",
 })
 
 require("bookmarks"):setup({
-  last_directory = { enable = true, persist = true, mode="dir" },
+	last_directory = { enable = true, persist = true, mode = "dir" },
 	persist = "all",
 	desc_format = "full",
 	file_pick_mode = "parent",
@@ -55,9 +54,9 @@ require("bookmarks"):setup({
 })
 
 require("smart-enter"):setup({
-  open_multi = true,
+	open_multi = true,
 })
-
 
 require("git"):setup()
 
+require("relative-motions"):setup({ show_numbers = "none", show_motion = true, enter_mode = "first" })
