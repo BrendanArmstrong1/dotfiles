@@ -1,5 +1,12 @@
 #!/bin/sh
 
+case $1 in
+  1) notify-send "🌎 Networktraffic" "🔻Traffic Recieved
+🔺Traffic transmitted";;
+esac
+
+[ -n "$1" ] && exit
+
 logfile="/dev/shm/netlog"
 rxcurrent="$(($(paste -d '+' /sys/class/net/[ew]*/statistics/rx_bytes)))"
 txcurrent="$(($(paste -d '+' /sys/class/net/[ew]*/statistics/tx_bytes)))"

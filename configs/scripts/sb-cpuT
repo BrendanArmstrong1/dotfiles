@@ -4,8 +4,6 @@
 case $1 in
     1) notify-send "10 Most CPU Usage
 PROGRAM         %CPU" "$(ps axch -o cmd:15,%cpu --sort -%cpu | head)" ;;
-    2) setsid -f "$TERMINAL" -e vim ~/.config/scripts/blocks/sb-cpuT ;;
-    3) setsid -f "$TERMINAL" -e htop ;;
 esac
 
 

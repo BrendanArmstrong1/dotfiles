@@ -52,6 +52,7 @@ local is_linux = not is_wsl and not is_mac
 
 if is_linux then
 	o.clipboard:append("unnamedplus") -- system clipboard
+	o.clipboard:append("unnamed") -- system clipboard
 end
 
 o.cmdheight = 1

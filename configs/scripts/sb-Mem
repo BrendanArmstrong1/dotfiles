@@ -3,7 +3,6 @@
 case $1 in
     1) notify-send "10 Most Memory Usage
 PROGRAM         %Mem" "$(ps axch -o cmd:15,%mem --sort -%mem | head)" ;;
-    2) setsid -f "$TERMINAL" -e vim ~/.config/scripts/blocks/sb-Mem ;;
     3) notify-send "$(free -h | sed 2q)" ;;
 esac
 

@@ -9,8 +9,6 @@ send_gpu_info() {
 
 case $1 in
 1) notify-send "$(cat /sys/class/drm/card1/device/pp_dpm_sclk)" ;;
-2) setsid -f "$TERMINAL" -e "$EDITOR" ~/.config/scripts/blocks/sb-gpuT ;;
-3) setsid -f "$TERMINAL" -e radeontop -c ;;
 esac
 
 [ -n "$1" ] || send_gpu_info

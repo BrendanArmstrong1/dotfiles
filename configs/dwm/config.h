@@ -9,13 +9,13 @@ static unsigned int snap      = 0;       /* snap pixel */
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
 static const int focusonwheel       = 0;
-static char font[]            = "FuraCode Nerd Font Mono:size=10";
-static char dmenufont[]       = "FuraCode Nerd Font Mono:size=10";
+static char font[]            = "ComicCode Nerd Font Mono:size=11";
+static char dmenufont[]       = "ComicCode Nerd Font Mono:size=11";
 static const char *fonts[] = {
-          "monospace:size=10",
+          "monospace:size=11",
 					"Noto Color Emoji:size:16",
-					"FuraCode Nerd Font Mono:size=10",
-					"Source Han Sans:size=10",
+					"ComicCode Nerd Font Mono:size=11",
+					"Source Han Sans:size=11",
 					};
 static char normbgcolor[]           = "#222222";
 static char normbordercolor[]       = "#000000";
@@ -117,7 +117,7 @@ static Key keys[] = {
 	{ Mod1Mask|MODKEY,         XK_8,      spawn,          SHCMD("screenshot.sh --wiki") },
 	{ Mod1Mask|MODKEY,         XK_g,      spawn,          SHCMD("screenshot.sh --pictures") },
 	/*{ Mod1Mask|MODKEY,         XK_c,      spawn,          SHCMD("screen_to_clipboard.sh") },*/
-	{ Mod1Mask|MODKEY,         XK_b,      spawn,          SHCMD("google-chrome-stable") },
+	{ Mod1Mask|MODKEY,         XK_b,      spawn,          SHCMD("firefox") },
 	{ Mod1Mask|MODKEY,         XK_s,      spawn,          SHCMD("steam") },
 	{ Mod1Mask|MODKEY,         XK_d,      spawn,          SHCMD("discord") },
 	{ Mod1Mask|MODKEY,         XK_p,      spawn,          SHCMD("pavucontrol") },
