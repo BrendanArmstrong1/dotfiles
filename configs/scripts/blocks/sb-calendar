@@ -1,0 +1,47 @@
+#!/bin/sh
+
+[ -n "$BLOCK_BUTTON" ] && d="$(date +%_d | sed -n 's/\s*//p')"
+case $BLOCK_BUTTON in
+    1) notify-send "$(cal | sed 's/\s\?\(\<'"$d"'\>\)\s\?/(\1)/g')" ;;
+    3) notify-send "$(cal -3 | sed 's/\(.\{21\}\)\s\('"$d"'\)\s\(.\{21\}\)/\1(\2)\3/g')" ;;
+esac
+
+send_date_info() {
+  month=$(date +%m | sed 's/^0*//') # remove leading zero
+  day=$(date +%a)
+  month_str=$(date +%b)
+  date_num=$(date +%d)
+  time_str=$(date +%l:%M)
+  am_pm=$(date +%P)
+
+  # Determine season
+  case $month in
+    3|4|5)
+      day_color="#d991c1"    # orchid
+      month_color="#7ecf9f"  # mint green
+      time_color="#7ecff2"   # sky blue
+      ;;
+    6|7|8)
+      day_color="#ffa07a"    # light salmon
+      month_color="#f0c674"  # golden sand
+      time_color="#ffeb80"   # lemon
+      ;;
+    9|10|11)
+      day_color="#e08e45"    # pumpkin spice
+      month_color="#ba7f4a"  # sienna
+      time_color="#c9a86b"   # tan
+      ;;
+    12|1|2)
+      day_color="#c4d7e0"    # frost blue
+      month_color="#e3e3e3"  # ice grey
+      time_color="#a9b7c6"   # slate blue
+      ;;
+  esac
+
+  printf "^c%s^%s ^c%s^%s %s,^c%s^%s %s^d^\n" \
+    "$day_color" "$day" \
+    "$month_color" "$month_str" "$date_num" \
+    "$time_color" "$time_str" "$am_pm"
+}
+
+send_date_info

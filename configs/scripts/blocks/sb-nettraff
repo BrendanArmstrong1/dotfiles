@@ -1,0 +1,104 @@
+#!/bin/sh
+
+case $BLOCK_BUTTON in
+  1) notify-send "🌎 Networktraffic" "⮟ Traffic Recieved
+⮝ Traffic transmitted";;
+esac
+
+color_gradient() {
+  start=$1
+  end=$2
+  percent=$3
+
+  # Strip leading '#' if present
+  start=${start#"#"}
+  end=${end#"#"}
+
+  # Convert hex to decimal RGB components
+  sr=$((16#${start:0:2}))
+  sg=$((16#${start:2:2}))
+  sb=$((16#${start:4:2}))
+
+  er=$((16#${end:0:2}))
+  eg=$((16#${end:2:2}))
+  eb=$((16#${end:4:2}))
+
+  # Calculate interpolated rgb values
+  rr=$((sr + (er - sr) * percent / 100))
+  rg=$((sg + (eg - sg) * percent / 100))
+  rb=$((sb + (eb - sb) * percent / 100))
+
+  # Format back to hex
+  printf "#%02x%02x%02x" $rr $rg $rb
+}
+
+send_traffic_info() {
+  logfile="/dev/shm/netlog"
+  rxcurrent="$(($(paste -d '+' /sys/class/net/[ew]*/statistics/rx_bytes)))"
+  txcurrent="$(($(paste -d '+' /sys/class/net/[ew]*/statistics/tx_bytes)))"
+
+  if ! [ -f "$logfile" ]; then
+    echo "$rxcurrent $txcurrent" > "$logfile"
+    printf "initializing...\\n"
+    exit
+  fi
+
+  read rxprev txprev < "$logfile"
+
+  down_kb=$(((rxcurrent - rxprev) / 1024))
+  up_kb=$(((txcurrent - txprev) / 1024))
+
+  downsuff="KB"
+  upsuff="KB"
+
+  down_mib=$((down_kb / 1024))
+  up_mib=$((up_kb / 1024))
+
+  if [ "$down_mib" -gt 0 ]; then
+    down=$down_mib
+    downsuff="MiB"
+  else
+    down=$down_kb
+  fi
+
+  if [ "$up_mib" -gt 0 ]; then
+    up=$up_mib
+    upsuff="MiB"
+  else
+    up=$up_kb
+  fi
+  📦
+
+  case $BLOCK_BUTTON in
+    1) ;;  # Do nothing on left click
+    *) echo "$rxcurrent $txcurrent" > "$logfile" ;;  # Update stats otherwise
+  esac
+  max_speed_down_kb=10240  # 10 MiB threshold
+  max_speed_up_kb=1024  # 1 MiB threshold
+
+  down_pct=$(( down_kb * 100 / max_speed_down_kb ))
+  [ "$down_pct" -gt 100 ] && down_pct=100
+
+  up_pct=$(( up_kb * 100 / max_speed_up_kb ))
+  [ "$up_pct" -gt 100 ] && up_pct=100
+
+  # Base colors for arrows (solid max)
+  down_arrow_color="#ff4444"   # bright red
+  up_arrow_color="#bb33bb"     # bright purple
+
+  # Gradient for values (from dark to bright)
+  value_down_start="#cccccc"  # light gray
+  value_down_end="#ff4444"    # vivid red
+
+  value_up_start="#cccccc"    # light gray
+  value_up_end="#bb33bb"      # vivid purple
+
+
+  down_val_color=$(color_gradient "$value_down_start" "$value_down_end" "$down_pct")
+  up_val_color=$(color_gradient "$value_up_start" "$value_up_end" "$up_pct")
+
+  # Compose output: arrows solid color, values with gradient
+  echo "^c${down_arrow_color}^⮟^d^ ^c${down_val_color}^$down^d^ $downsuff ^c${up_arrow_color}^⮝^d^ ^c${up_val_color}^$up^d^ $upsuff"
+}
+
+send_traffic_info

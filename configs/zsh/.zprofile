@@ -33,4 +33,5 @@ export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 export XINITRC="$XDG_CONFIG_HOME/X11/xinitrc"
 export EXA_COLORS="da=35"
 
-[[ $(fgconsole 2>/dev/null) == 1 ]] && exec ssh-agent startx "$XDG_CONFIG_HOME/X11/xinitrc" --vt1
+
+[[ $(fgconsole 2>/dev/null) == 1 ]] && exec startx "$XDG_CONFIG_HOME/X11/xinitrc" --vt1

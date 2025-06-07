@@ -1,0 +1,28 @@
+#!/bin/sh
+
+case $BLOCK_BUTTON in
+    1) notify-send "10 Most CPU Usage
+PROGRAM         %CPU" "$(ps axch -o cmd:15,%cpu --sort -%cpu | head)" ;;
+esac
+
+send_cpu_info() {
+ # Read from sysfs directly
+  temp_raw="$(cat /sys/class/thermal/thermal_zone0/temp)"
+  cpu_temp="$((temp_raw / 1000))"
+
+  # Determine temp color
+  if [ "$cpu_temp" -lt 50 ]; then
+    color="#00bfff"
+  elif [ "$cpu_temp" -lt 70 ]; then
+    color="#ffd700"
+  elif [ "$cpu_temp" -lt 85 ]; then
+    color="#ff8c00"
+  else
+    color="#ff4500"
+  fi
+
+  printf "CPU:^c%s^%s°C^d^\n" "$color" "$cpu_temp" 
+}
+
+
+send_cpu_info

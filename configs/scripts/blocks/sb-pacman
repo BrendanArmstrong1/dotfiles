@@ -1,0 +1,13 @@
+#!/bin/sh
+
+
+case $BLOCK_BUTTON in
+    1) notify-send "$(pacman -Qu)" ;;
+esac
+
+send_pacman_info() {
+  numberofpackages="$(pacman -Qu | wc -l)"
+  printf "  $numberofpackages"
+}
+
+send_pacman_info

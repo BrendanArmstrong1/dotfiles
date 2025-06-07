@@ -1,0 +1,23 @@
+#!/bin/sh
+
+case $BLOCK_BUTTON in
+1) notify-send "$(cat /sys/class/drm/card1/device/pp_dpm_sclk)" ;;
+esac
+
+send_gpu_info() {
+  gpu_temp="$(echo "$(cat /sys/class/drm/card1/device/hwmon/hwmon0/temp1_input) / 1000" | bc)"
+
+  if [ "$gpu_temp" -lt 50 ]; then
+    color="#00bfff"  # Cool Blue
+  elif [ "$gpu_temp" -lt 70 ]; then
+    color="#ffd700"  # Warm Yellow
+  elif [ "$gpu_temp" -lt 85 ]; then
+    color="#ff8c00"  # Hot Orange
+  else
+    color="#ff4500"  # Danger Red
+  fi
+
+  printf "GPU:^c%s^+%s°C^d^\n" "$color" "$gpu_temp"
+}
+
+send_gpu_info

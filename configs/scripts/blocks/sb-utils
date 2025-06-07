@@ -1,0 +1,28 @@
+#!/bin/sh
+
+color_gradient() {
+  start=$1
+  end=$2
+  percent=$3
+
+  # Strip leading '#' if present
+  start=${start#"#"}
+  end=${end#"#"}
+
+  # Convert hex to decimal RGB components
+  sr=$((16#${start:0:2}))
+  sg=$((16#${start:2:2}))
+  sb=$((16#${start:4:2}))
+
+  er=$((16#${end:0:2}))
+  eg=$((16#${end:2:2}))
+  eb=$((16#${end:4:2}))
+
+  # Calculate interpolated rgb values
+  rr=$((sr + (er - sr) * percent / 100))
+  rg=$((sg + (eg - sg) * percent / 100))
+  rb=$((sb + (eb - sb) * percent / 100))
+
+  # Format back to hex
+  printf "#%02x%02x%02x" $rr $rg $rb
+}

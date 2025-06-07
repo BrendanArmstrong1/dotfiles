@@ -1,3 +1,9 @@
+# Start ssh-agent if not already running
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+    ssh-agent > "$XDG_RUNTIME_DIR/ssh-agent.env"
+fi
+[[ -f "$XDG_RUNTIME_DIR/ssh-agent.env" ]] && source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
+
 xset r rate 240 50 &
 monitorSwap
 backgroundsetter &
@@ -5,4 +11,7 @@ dwmblocks &
 dunst & 
 transmission-daemon &
 picom -b &
-exec dwm
+
+while :; do
+  dwm
+done

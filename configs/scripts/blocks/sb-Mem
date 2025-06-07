@@ -1,9 +1,9 @@
 #!/bin/sh
 
-case $1 in
+case $BLOCK_BUTTON in
     1) notify-send "10 Most Memory Usage
 PROGRAM         %Mem" "$(ps axch -o cmd:15,%mem --sort -%mem | head)" ;;
     3) notify-send "$(free -h | sed 2q)" ;;
 esac
 
-[ -n "$1" ] || free -h | sed -n '/^Mem:/ s_Mem:\s*\([0-9.]\+\)[^0-9]\+\s*\([0-9.]\+\)[^0-9]\+\s*.*_M:\2/\1 G_p'
+free -h | sed -n '/^Mem:/ s_Mem:\s*\([0-9.]\+\)[^0-9]\+\s*\([0-9.]\+\)[^0-9]\+\s*.*_M:\2/\1 G_p'

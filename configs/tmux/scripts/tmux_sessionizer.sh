@@ -30,11 +30,10 @@ else
     cat <<EOF > "$PATH_FILE"
 $HOME/ssd
 $HOME/.config
-$HOME/.config/scripts
 EOF
   fi
   mapfile -t paths < "$PATH_FILE"
-  selected=$(find "${paths[@]}" -maxdepth 1 -type d 2>/dev/null | sort -u | fzf)
+  selected=$(find -L "${paths[@]}" -maxdepth 1 -type d 2>/dev/null | sort -u | fzf)
 fi
 
 if [ -z "$selected" ]; then
