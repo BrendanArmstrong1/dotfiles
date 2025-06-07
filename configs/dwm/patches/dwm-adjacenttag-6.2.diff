@@ -47,7 +47,7 @@ diff -up a/dwm.c b/dwm.c
 @@ -1192,6 +1198,13 @@ movemouse(const Arg *arg)
  	}
  }
- 
+
 +unsigned int
 +nexttag(void)
 +{
@@ -61,7 +61,7 @@ diff -up a/dwm.c b/dwm.c
 @@ -1208,6 +1221,13 @@ pop(Client *c)
  	arrange(c->mon);
  }
- 
+
 +unsigned int
 +prevtag(void)
 +{
@@ -74,7 +74,7 @@ diff -up a/dwm.c b/dwm.c
  {
 @@ -1671,6 +1691,32 @@ tagmon(const Arg *arg)
  }
- 
+
  void
 +tagtonext(const Arg *arg)
 +{
@@ -108,7 +108,7 @@ diff -up a/dwm.c b/dwm.c
 @@ -2044,6 +2090,18 @@ view(const Arg *arg)
  	arrange(selmon);
  }
- 
+
 +void
 +viewnext(const Arg *arg)
 +{
@@ -120,7 +120,7 @@ diff -up a/dwm.c b/dwm.c
 +{
 +	view(&(const Arg){.ui = prevtag()});
 +}
-+ 
++
  Client *
  wintoclient(Window w)
  {
