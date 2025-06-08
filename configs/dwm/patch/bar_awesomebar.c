@@ -1,3 +1,5 @@
+extern Monitor *selmon;
+
 int
 width_awesomebar(Bar *bar, BarWidthArg *a)
 {
@@ -30,7 +32,7 @@ draw_awesomebar(Bar *bar, BarDrawArg *a)
 		for (i = 0, c = bar->mon->clients; c; c = c->next, i++) {
 			if (!ISVISIBLE(c))
 				continue;
-			if (bar->mon->sel == c)
+			else if (bar->mon == selmon && bar->mon->sel == c)
 				#if BAR_VTCOLORS_PATCH
 				scm = SchemeTitleSel;
 				#elif BAR_TITLECOLOR_PATCH
