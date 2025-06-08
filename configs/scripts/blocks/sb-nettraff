@@ -67,7 +67,6 @@ send_traffic_info() {
   else
     up=$up_kb
   fi
-  📦
 
   case $BLOCK_BUTTON in
     1) ;;  # Do nothing on left click
