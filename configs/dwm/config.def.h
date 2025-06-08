@@ -20,6 +20,7 @@ static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+	[SchemeHid]  = { col_cyan,  col_gray1, col_cyan  },
 };
 static const unsigned int alphas[][3]      = {
     /*               fg      bg        border*/
@@ -137,7 +138,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_j,      movestack,      {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } },
 	{ MODKEY,                       XK_z,      zoom,           {0} },
-	{ MODKEY,                       XK_Tab,    view,           {0} },
+	{ AltMask,                      XK_Tab,    showhideclient, {0} },
 	{ MODKEY,                       XK_r,      viewnext,       {0} },
 	{ MODKEY,                       XK_c,      viewprev,       {0} },
 	{ MODKEY|ShiftMask,             XK_r,	     tagtonext,      {0} },
@@ -188,7 +189,9 @@ static const Button buttons[] = {
 	/* click                event mask      button          function        argument */
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
+	{ ClkWinTitle,          0,              Button1,        togglewin,      {0} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
+	{ ClkWinTitle,          0,              Button3,        showhideclient, {0} },
 	{ ClkStatusText,        0,              Button1,        sigdwmblocks,   {.i = 1 } },
 	{ ClkStatusText,        0,              Button2,        sigdwmblocks,   {.i = 2 } },
 	{ ClkStatusText,        0,              Button3,        sigdwmblocks,   {.i = 3 } },
