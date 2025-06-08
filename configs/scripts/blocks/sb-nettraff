@@ -81,20 +81,16 @@ send_traffic_info() {
   up_pct=$(( up_kb * 100 / max_speed_up_kb ))
   [ "$up_pct" -gt 100 ] && up_pct=100
 
-  # Base colors for arrows (solid max)
-  down_arrow_color="#ff4444"   # bright red
-  up_arrow_color="#bb33bb"     # bright purple
-
   # Gradient for values (from dark to bright)
   value_down_start="#cccccc"  # light gray
-  value_down_end="#ff4444"    # vivid red
-
   value_up_start="#cccccc"    # light gray
-  value_up_end="#bb33bb"      # vivid purple
+  # Base colors for arrows (solid max)
+  down_arrow_color="#ff4444"   # bright red
+  up_arrow_color="#57b9ff"     # bright purple
 
 
-  down_val_color=$(color_gradient "$value_down_start" "$value_down_end" "$down_pct")
-  up_val_color=$(color_gradient "$value_up_start" "$value_up_end" "$up_pct")
+  down_val_color=$(color_gradient "$value_down_start" "$down_arrow_color" "$down_pct")
+  up_val_color=$(color_gradient "$value_up_start" "$up_arrow_color" "$up_pct")
 
   # Compose output: arrows solid color, values with gradient
   echo "^c${down_arrow_color}^⮟^d^ ^c${down_val_color}^$down^d^ $downsuff ^c${up_arrow_color}^⮝^d^ ^c${up_val_color}^$up^d^ $upsuff"
