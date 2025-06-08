@@ -10,6 +10,7 @@ static const unsigned int gappov    = 0;       /* vert outer gap between windows
 static       int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
+static const int focusonwheel       = 0;
 static const char statussep         = ';';      /* separator between status bars */
 static const char *fonts[]          = { "ComicCode Nerd Font Mono:size=11" };
 static const char dmenufont[]       = "ComicCode Nerd Font Mono:size=11";
