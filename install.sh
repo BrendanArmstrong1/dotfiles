@@ -31,5 +31,5 @@ for src in "$CONFIG_DIR/configs/"*;do
   echo "Linked $src -> $dest"
 done
 
-sudo cp -r "$CONFIG_DIR/Fonts/" /usr/share/fonts/OTF/
-fc-cache -fv
+# sudo cp -r "$CONFIG_DIR/Fonts/" /usr/share/fonts/OTF/
+# fc-cache -fv
