@@ -26,6 +26,7 @@ static const unsigned int alphas[][3]      = {
     /*               fg      bg        border*/
     [SchemeNorm] = { OPAQUE, baralpha, borderalpha },
 	  [SchemeSel]  = { OPAQUE, baralpha, borderalpha },
+    [SchemeHid]  = { OPAQUE, baralpha, borderalpha },
 };
 
 /* tagging */
@@ -93,7 +94,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run","-l", "20", "-vi", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "kitty", NULL };
+static const char *termcmd[]  = { "kitty", "--title", "Terminal", NULL };
 
 #include "movestack.c"
 static const Key keys[] = {
@@ -108,13 +109,13 @@ static const Key keys[] = {
   // { Mod1Mask|MODKEY,         XK_7,      spawn,          SHCMD("screenshot.sh --full") },
   // { Mod1Mask|MODKEY,         XK_8,      spawn,          SHCMD("screenshot.sh --wiki") },
   // { Mod1Mask|MODKEY,         XK_g,      spawn,          SHCMD("screenshot.sh --pictures") },
-  { MODKEY|AltMask,         XK_b,      spawn,          SHCMD("firefox") },
-  { MODKEY|AltMask,         XK_s,      spawn,          SHCMD("steam") },
-  { MODKEY|AltMask,         XK_d,      spawn,          SHCMD("discord") },
-  { MODKEY|AltMask,         XK_p,      spawn,          SHCMD("pavucontrol") },
+  { MODKEY|AltMask,               XK_b,      spawn,          SHCMD("firefox") },
+  { MODKEY|AltMask,               XK_s,      spawn,          SHCMD("steam") },
+  { MODKEY|AltMask,               XK_d,      spawn,          SHCMD("discord") },
+  { MODKEY|AltMask,               XK_p,      spawn,          SHCMD("pavucontrol") },
   // { Mod1Mask|MODKEY,         XK_i,      spawn,          SHCMD("Audio_Swap.sh") },
   // { ShiftMask|MODKEY,         XK_t,      spawn,          SHCMD("OCR_scrot.sh") },
-  //{ Mod1Mask|MODKEY,         XK_c,      spawn,          SHCMD("screen_to_clipboard.sh") },//
+  { MODKEY|ShiftMask,             XK_c,      spawn,          SHCMD("xcolor | xargs -selection clipboard") },//
   // { ShiftMask|MODKEY,         XK_s,      spawn,          SHCMD("screen_to_clipboard.sh") },
   // { MODKEY,                       XK_Insert, spawn,          SHCMD("xdotool type $(grep -v '^#' ~/ssd/Documents/snippets | dmenu -i -l 50 | cut -d' ' -f1)") },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
