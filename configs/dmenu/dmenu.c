@@ -744,17 +744,26 @@ keypress(XKeyEvent *ev)
 		case XK_g: ksym = XK_Escape;    break;
 		case XK_h: ksym = XK_BackSpace; break;
 		case XK_i: ksym = XK_Tab;       break;
-		case XK_j: /* fallthrough */
 		case XK_J: /* fallthrough */
 		case XK_m: /* fallthrough */
 		case XK_M: ksym = XK_Return; ev->state &= ~ControlMask; break;
 		case XK_n: ksym = XK_Down;      break;
 		case XK_p: ksym = XK_Up;        break;
 
-		case XK_k: /* delete right */
-			text[cursor] = '\0';
-			match();
-			break;
+		case XK_j: // Ctrl+j: move down (next item)
+        if (sel && sel->right && (sel = sel->right) == next) {
+          curr = next;
+          calcoffsets();
+          drawmenu();
+        }
+        break;
+		case XK_k: // Ctrl+k: move up (previous item)
+        if (sel && sel->left && (sel = sel->left)->right == curr) {
+          curr = prev;
+          calcoffsets();
+          drawmenu();
+        }
+        break;
 		case XK_u: /* delete left */
 			insert(NULL, 0 - cursor);
 			break;
