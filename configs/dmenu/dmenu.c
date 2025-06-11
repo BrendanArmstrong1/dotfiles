@@ -575,28 +575,53 @@ vi_keypress(KeySym ksym, const XKeyEvent *ev)
 		}
 		sel = matchend;
 		break;
-	case XK_h:
+  case XK_k: // move left (previous item in row)
+	if (sel && sel->left && (sel = sel->left)->right == curr) {
+		curr = prev;
+		calcoffsets();
+	}
+	break;
+
+  case XK_j: // move right (next item in row)
+	if (sel && sel->right && (sel = sel->right) == next) {
+		curr = next;
+		calcoffsets();
+	}
+	break;
+
+  case XK_h: // move up (previous row in same column)
+	if (columns <= 1) {
 		if (cursor)
 			cursor = nextrune(-1);
 		break;
-	case XK_j:
-		if (sel && sel->right && (sel = sel->right) == next) {
-			curr = next;
-			calcoffsets();
-		}
-		break;
-	case XK_k:
-		if (sel && sel->left && (sel = sel->left)->right == curr) {
-			curr = prev;
-			calcoffsets();
-		}
-		break;
-	case XK_l:
+	}
+	// grid movement
+	if (sel && lines > 0) {
+		struct item *it = sel;
+		for (int i = 0; i < lines && it && it->left; i++)
+			it = it->left;
+		if (it)
+			sel = it;
+	}
+	break;
+
+  case XK_l: // move down (next row in same column)
+    if (columns <= 1) {
 		if (text[cursor] != '\0' && text[cursor + 1] != '\0')
 			cursor = nextrune(+1);
 		else if (text[cursor] == '\0' && cursor)
 			--cursor;
 		break;
+	}
+	// grid movement
+	if (sel && lines > 0) {
+		struct item *it = sel;
+		for (int i = 0; i < lines && it && it->right; i++)
+			it = it->right;
+		if (it)
+			sel = it;
+	}
+	break;
 	case XK_w:
 		movewordedge(+1);
 		if (text[cursor] != '\0' && text[cursor + 1] != '\0')
