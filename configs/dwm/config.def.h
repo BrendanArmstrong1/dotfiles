@@ -115,7 +115,7 @@ static const Key keys[] = {
   { MODKEY|AltMask,               XK_p,      spawn,          SHCMD("pavucontrol") },
   // { Mod1Mask|MODKEY,         XK_i,      spawn,          SHCMD("Audio_Swap.sh") },
   // { ShiftMask|MODKEY,         XK_t,      spawn,          SHCMD("OCR_scrot.sh") },
-  { MODKEY|ShiftMask,             XK_c,      spawn,          SHCMD("xcolor | xargs -selection clipboard") },//
+  { MODKEY|AltMask,               XK_c,      spawn,          SHCMD("colorpicker.sh") },//
   // { ShiftMask|MODKEY,         XK_s,      spawn,          SHCMD("screen_to_clipboard.sh") },
   // { MODKEY,                       XK_Insert, spawn,          SHCMD("xdotool type $(grep -v '^#' ~/ssd/Documents/snippets | dmenu -i -l 50 | cut -d' ' -f1)") },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
@@ -178,9 +178,9 @@ static const Button buttons[] = {
 	{ ClkClientWin,         AltMask,        Button3,        resizeorfacts,  {0} },
 	{ ClkClientWin,       ShiftMask,        Button3,        resizemouse,    {0} },
 	{ ClkTagBar,            0,              Button1,        view,           {0} },
-	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
-	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
-	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
+	{ ClkTagBar,            AltMask,        Button3,        toggleview,     {0} },
+	{ ClkTagBar,          ShiftMask,        Button1,        tag,            {0} },
+	{ ClkTagBar,  AltMask|ShiftMask,        Button3,        toggletag,      {0} },
 };
 
 static const char *ipcsockpath = "/tmp/dwm.sock";
